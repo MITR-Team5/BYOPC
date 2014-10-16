@@ -22,18 +22,8 @@ if(count($ERRORS)==0)
 	echo "Database connection successful!";
 }
 ?>
-
-<!DOCTYPE html>
+<!doctype html>
 <html>
-	<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  </head>
-  <title>
-    BD BYOPC | 
-	<?php 
-		if (basename($_SERVER['PHP_SELF']) == "index.php") echo "Welcome";
-	?>
-  </title>
-  <body>
-  </body>
+  <?php include "header.php"; ?>
+  <?php include "body.php"; ?>
 </html>
