@@ -1,4 +1,2 @@
-BD-BYOPC
-========
-
-A prototype website that serves as an interactive guide that would introduce employees of BD to the team suggested implementation of the BYOPC plan. The website will require a secure employee login and will aid them in deciding whether or not the BYOPC program fits their workflow. It will clearly present the policies necessary to the BYOPC program and the options they can choose as employees. Employees will then have to acknowledge that they have read the guide, provide specific feedback about the program, and input computers they plan on bringing if they choose to do so. A database will allow the workplace engineering team to see which employees have read and acknowledged the presented plan, their feedback, and a landscape of possible computers they will need to support. 
+Team5 MITR BYOPC
+=================
