@@ -67,3 +67,9 @@ if(count($ERRORS)==0)
 		undo_magic_quotes_gpc($_COOKIE);
 	}
 }
+
+if(count($ERRORS)!=0)
+{
+	$_SESSION["ERRORS"]=$ERRORS;	
+}
+
