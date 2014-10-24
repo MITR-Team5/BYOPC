@@ -14,7 +14,7 @@
 	  <form name="loginInput">
 	    <p>Username: <input type="text" name="username" id="username" size="30" maxlength="40" class= "inputfield" required /></p>
 
-	    <p>Password: <input type="password" name="pwd" id="pwd" size="30" maxlength="40" class= "inputfield" required /></p>
+	    <p>Password: <input type="password" name="password" id="pwd" size="30" maxlength="40" class= "inputfield" required /></p>
 
 	  </form>
 

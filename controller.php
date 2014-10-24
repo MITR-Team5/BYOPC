@@ -1,14 +1,26 @@
 <?php
 //For testing
-include("dbconnect.php");
+/////////////////////////////////////
+// include("dbconnect.php");
 // $_POST["action"]="register";
 // $_POST["username"]="mikeogod";
 // $_POST["password"]="crazymonkey";
 // $_POST["password_again"]="crazymonkey";
 
-$_POST["action"]="login";
-$_POST["username"]="mikeogod";
-$_POST["password"]="crazymonkey";
+// $_POST["action"]="login";
+// $_POST["username"]="mikeogod";
+// $_POST["password"]="crazymonkey";
+
+// $_POST["action"]="submit_comment";
+// $_POST["value"]="test comment";
+
+// $_POST["action"]="get_comments";
+
+session_start();
+echo "SESSION: <br />";
+print_r($_SESSION);
+
+////////////////////////////////////
 
 if(!isset($_POST) || empty($_POST))
 {
@@ -16,6 +28,7 @@ if(!isset($_POST) || empty($_POST))
 }
 
 $ERRORS=array();
+$_SESSION["ERRORS"]=$ERRORS;
 
 if(ReceiveCommand("login"))
 {
@@ -124,25 +137,35 @@ else if(ReceiveCommand("register"))
 }
 else if(ReceiveCommand("submit_comment"))
 {
-	if(!isset($SESSION["users"]))
+	if(!isset($_SESSION["user"]))
 	{
-		array_push($ERRORS, "User is not signed in");
+		array_push($ERRORS, "User is not logged in");
+		//
+		echo "user not logged in!";
 	}
-	try 
+	else
 	{
-		$db->beginTransaction();
+		try
+		{
+			$db->beginTransaction();
 		
-		$query="INSERT INTO `comments`(`post_time`, `value`, `user`) VALUES(:post_time, :value, :username)";
-		$stmt=$db->prepare($query);
-		$postTime=strval(time());
-		$stmt->execute(array(":post_time"=>$postTime, ":value"=>$_POST["value"], ":username"=>$_SESSION["user"]["username"]));
-		$db->commit();
+			$query="INSERT INTO `comments`(`post_time`, `value`, `user`) VALUES(:post_time, :value, :username)";
+			$stmt=$db->prepare($query);
+			$postTime=strval(time());
+			$stmt->execute(array(":post_time"=>$postTime, ":value"=>$_POST["value"], ":username"=>$_SESSION["user"]["username"]));
+			$db->commit();
+			//
+			echo "success!";
+		}
+		catch(PDOException $ex)
+		{
+			$db->rollBack();
+			array_push($ERRORS, $ex->getMessage());
+			//
+			echo $ex->getMessage();
+		}
 	}
-	catch(PDOException $ex)
-	{
-		$db->rollBack();
-		array_push($ERRORS, $ex->getMessage());
-	}
+	
 }
 else if(ReceiveCommand("get_comments"))
 {
@@ -150,7 +173,7 @@ else if(ReceiveCommand("get_comments"))
 	{
 		array_push($ERRORS, "User is not signed in");
 	}
-	if($_SESSION["users"]["role"]!="admin")
+	if($_SESSION["user"]["role"]!="admin")
 	{
 		array_push($ERRORS, "User is not an admin!");
 	}
