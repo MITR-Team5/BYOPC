@@ -8,10 +8,14 @@ $(document).ready(
     });
 
 function login() {
-  if($("#target").text() == "User not logged in!"){
+  	if($("#target").text() == "User not logged in!"){
 	  $("#userlogin").show();
 	  $("#loginButton").css("margin-top","30%");
 	  $("#footer").css("margin-top", "10%");
 	  $("#username").focus();
 	}
+	else() {
+		$("#userlogin").show();
+	}
+
 }
