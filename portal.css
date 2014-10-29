@@ -58,14 +58,15 @@ body{
 }
 
 #userlogin {
-  background-color: #ff4f01;
-  color: white;
+  background-color: white;
+  color: #100b72;
   position: absolute;
   margin-top: 18%;
-  margin-left: 35%;
+  margin-left: 38%;
   border-radius: 18px;
   padding: 6px;
 }
+
 
 #footer{
   position: relative;

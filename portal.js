@@ -8,7 +8,10 @@ $(document).ready(
     });
 
 function login() {
-  $("#userlogin").show();
-  $("#loginbutton").css({'margin-top':'35%'});
-  $("#username").focus();
+  if($("#target").text() == "User not logged in!"){
+	  $("#userlogin").show();
+	  $("#loginButton").css("margin-top","30%");
+	  $("#footer").css("margin-top", "10%");
+	  $("#username").focus();
+	}
 }
