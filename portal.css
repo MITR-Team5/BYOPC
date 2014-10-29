@@ -28,6 +28,7 @@ body{
   width: 100%;
   left: 0px;
   right: 0px;
+  margin-top: 5px;
 }
 
 #middlebar{
@@ -38,6 +39,7 @@ body{
   left: 0px;
   right: 0px;
   z-index: -1;
+  margin-top: 5px;
 }
 
 #bottombar{
@@ -83,3 +85,7 @@ body{
 
 }
 
+form {
+  margin-top: 40px;
+  color: white;
+}
