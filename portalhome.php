@@ -1,4 +1,5 @@
 <?php include 'header.php'; ?>
+<?php include 'session.php'; ?>
 
 	<img src="bdlogo.png" height="90px" width="250px"> 
     	
