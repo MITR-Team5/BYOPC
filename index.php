@@ -1,30 +1,65 @@
 <?php
 session_start();
-include("dbconnect.php");
-
-
 if(!isset($_SESSION["user"]))
 {
-	echo "User not logged in!";
+?>
+	<html>
+		<div id="target" style="display:none;">
+		<?php
+			echo htmlspecialchars("User not logged in!");
+		?>
+		</div>
+	</html>
+	<!-- echo "User not logged in!"; -->
+<?php
 }
 
 if(isset($_SESSION["user"]) && $_SESSION["role"]=="admin")
 {
-	echo "Admin logged in!";
+?>
+	<html>
+		<div id="target" style="display:none;">
+		<?php
+			echo htmlspecialchars("Admin logged in!");
+		?>
+		</div>
+	</html>
+	<!-- echo "Admin logged in!"; -->
+
+<?php	
 }
 
 if(isset($_SESSION["user"]) && $_SESSION["role"]=="normal")
 {
-	echo "User logged in!";
+?>
+	<html>
+		<div id="target" style="display:none;">
+		<?php
+			echo htmlspecialchars("User logged in!");
+		?>
+		</div>
+	</html>
+<!-- 	echo "User logged in!"; -->
+<?php
+	header("Location:survey.php");
 }
 
 if(count($ERRORS)==0)
 {
-	echo "Database connection successful!";
+?>
+	<html>
+		<div id="target" style="display:none;">
+		<?php
+			echo htmlspecialchars("Database connection successful!");
+		?>
+		</div>
+	</html>
+<!-- 	echo "Database connection successful!"; -->
+
+<?php
 }
 ?>
 <!doctype html>
 <html>
-  <?php include "header.php"; ?>
-  <?php include "body.php"; ?>
+  <?php include "portalhome.php"; ?>
 </html>
