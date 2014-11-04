@@ -1,6 +1,5 @@
 <?php
 session_start();
-require('dbconnect.php');
 if(!isset($_SESSION["user"]))
 {
 ?>
@@ -15,8 +14,9 @@ if(!isset($_SESSION["user"]))
 <?php
 }
 
-if(isset($_SESSION["user"]) && $_SESSION["role"]=="admin")
+if(isset($_SESSION["user"]) && $_SESSION["user"]["role"]=="admin")
 {
+	header("Location:admin_page.php");
 ?>
 	<html>
 		<div id="target" style="display:none;">
@@ -30,8 +30,9 @@ if(isset($_SESSION["user"]) && $_SESSION["role"]=="admin")
 <?php	
 }
 
-if(isset($_SESSION["user"]) && $_SESSION["role"]=="normal")
+if(isset($_SESSION["user"]) && $_SESSION["user"]["role"]=="normal")
 {
+	header("Location:survey.php");
 ?>
 	<html>
 		<div id="target" style="display:none;">
@@ -41,25 +42,11 @@ if(isset($_SESSION["user"]) && $_SESSION["role"]=="normal")
 		</div>
 	</html>
 <!-- 	echo "User logged in!"; -->
-<?php
-	header("Location:survey.php");
-}
 
-if(count($ERRORS)==0)
-{
-?>
-	<html>
-		<div id="target" style="display:none;">
-		<?php
-			echo htmlspecialchars("Database connection successful!");
-		?>
-		</div>
-	</html>
-<!-- 	echo "Database connection successful!"; -->
+	
 
-<?php
-}
-?>
+<?php } ?>
+
 <!doctype html>
 <html>
   <?php include "portalhome.php"; ?>

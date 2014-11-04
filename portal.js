@@ -4,24 +4,14 @@ $(document).ready(
       //$("#userlogin").hide();
       //$("#loginButton").click(login);
       // $("#logoutButton").click(logout);
-      
-      //ajax
-      $("#login-button").on("click", function(e){
-    	  $.ajax({
-        	  url:"controller.php",
-        	  accepts:"json",
-        	  typr:"POST",
-        	  data:{action:"login", username:$("#username").val(), password:$("#password").val()},
-        	  success:function(data, textStatus, jqXHR){
-        		  alert("Success: "+jqXHR.responseText);
-        		  window.location.assign("login_success.php");
-        	  },
-        	  error:function(jqXHR, textStatus, errorThrown){
-        		  alert(jqXHR.responseText + textStatus + errorThrown);
-        	  }
-          });
-      });
-    
+	  
+      //$("#userRegister").hide();
+      $("#loginButton").click(showlogin);
+      // $("#logoutButton").click(logout);
+      $("#userloginButton").click(sendlogin);
+      //$("#registerButton").click(showregister);
+      $("#userRegisterButton").click(sendreg);
+
 });
 
 function login() {
@@ -63,8 +53,15 @@ function sendlogin() {
     password:pwd
   },
   function(data,status){
-    alert("Data: " + data + "\nStatus: " + status);
-  });
+	  if(data["errors"].length===0)
+      {
+		  window.location.assign("login_success.php");
+      }
+	  else
+	  {
+		  alert("Login failed: "+data["msg"]);
+	  }
+  }, "json");
 }
 
 function sendreg() {
@@ -77,6 +74,13 @@ function sendreg() {
     password:pwd
   },
   function(data,status){
-    alert("Data: " + data + "\nStatus: " + status);
-  });
+	  if(data["errors"].length===0)
+      {
+		  window.location.assign("index.php");
+      }
+	  else
+	  {
+		  alert("Login failed: "+data["msg"]);
+	  }
+  }, "json");
 }

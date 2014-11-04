@@ -1,2 +1,3 @@
 <?php
-//Survey result
+?>
+<p>Admin Page</p>
