@@ -1,7 +1,7 @@
 <?php
 //For testing
 /////////////////////////////////////
-// include("dbconnect.php");
+include("dbconnect.php");
 // $_POST["action"]="register";
 // $_POST["username"]="mikeogod";
 // $_POST["password"]="crazymonkey";
@@ -16,22 +16,25 @@
 
 // $_POST["action"]="get_comments";
 
-session_start();
-echo "SESSION: <br />";
-print_r($_SESSION);
+// session_start();
+// echo "SESSION: <br />";
+// print_r($_SESSION);
 
 ////////////////////////////////////
 
+//The response will take the following format:
+$ret=array("action"=>null, "data"=>null, "msg"=>null, "errors"=>array());
+
 if(!isset($_POST) || empty($_POST))
 {
-	return;
+	$ret["msg"]="Invalid operation";
 }
 
-$ERRORS=array();
-$_SESSION["ERRORS"]=$ERRORS;
+
 
 if(ReceiveCommand("login"))
 {
+	$ret["action"]="login";
 	try
 	{
 		$db->beginTransaction();
@@ -51,7 +54,8 @@ if(ReceiveCommand("login"))
 		{
 			if(!validate_password("", "", $db, $user["id"], "login", $_POST['password']))
 			{
-				$loginOk=false;
+				$ret["msg"]="The password is not correct";
+				array_push($ret["errors"], "WrongPassword");
 			}
 			else
 			{
@@ -61,6 +65,8 @@ if(ReceiveCommand("login"))
 		}
 		else 
 		{
+			$ret["msg"]="The user doens't exist";
+			array_push($ret["errors"], "UserNameNotExist");
 			$loginOk=false;
 		}
 		if($loginOk)
@@ -68,16 +74,15 @@ if(ReceiveCommand("login"))
 			unset($user['salt']);
 			unset($user['password']);
 			$_SESSION["user"]=$user;
-		}
-		else
-		{
-			array_push($ERRORS, "Login failed!");
+			
+			$ret["msg"]="Login Success!";
 		}
 	}
 	catch (PDOException $ex)
 	{
 		$db->rollBack();
-		array_push($ERRORS, $ex->getMessage());
+		array_push($ret["errors"], $ex->getMessage());
+		$ret["msg"]="Login failed due to an internal issue";
 		
 	}
 	
@@ -99,7 +104,8 @@ else if(ReceiveCommand("register"))
 		
 		if($user)
 		{
-			array_push($ERRORS, "User name already exists");
+			$ret["msg"]="The user name already exists";
+			array_push($ret['errors'], "UserNameExists");
 		}
 		else 
 		{
@@ -116,23 +122,28 @@ else if(ReceiveCommand("register"))
 				
 					$stmt->execute(array(":username" => $_POST["username"], ":password" => $password, ":salt" => $salt));
 					$db->commit();
+					
+					$ret["msg"]="Register success!";
 				}
 				catch(PDOException $ex)
 				{
 					$db->rollBack();
-					array_push($ERRORS, $ex->getMessage());
+					array_push($ret["errors"], $ex->getMessage());
+					$ret["msg"]="Register failed due to an internal issue";
 				}
 			}
 			else
 			{
-				array_push($ERRORS, "Passwords don't match");
+				$ret["msg"]="The two passwords entered don't match";
+				array_push($ret["errors"], "WrongPasswords");
 			}
 		}
 	}
 	catch(PDOException $ex)
 	{
 		$db->rollBack();
-		array_push($ERRORS, $ex->getMessage());
+		array_push($ret["errors"], $ex->getMessage());
+		$ret["msg"]="Register failed due to an internal issue";
 	}
 }
 else if(ReceiveCommand("submit_comment"))
@@ -140,8 +151,6 @@ else if(ReceiveCommand("submit_comment"))
 	if(!isset($_SESSION["user"]))
 	{
 		array_push($ERRORS, "User is not logged in");
-		//
-		echo "user not logged in!";
 	}
 	else
 	{
@@ -154,28 +163,29 @@ else if(ReceiveCommand("submit_comment"))
 			$postTime=strval(time());
 			$stmt->execute(array(":post_time"=>$postTime, ":value"=>$_POST["value"], ":username"=>$_SESSION["user"]["username"]));
 			$db->commit();
-			//
-			echo "success!";
+			
+			$ret["msg"]="The comment has been successfully submitted";
 		}
 		catch(PDOException $ex)
 		{
 			$db->rollBack();
-			array_push($ERRORS, $ex->getMessage());
-			//
-			echo $ex->getMessage();
+			array_push($ret["errors"], $ex->getMessage());
+			$ret["msg"]="Comment submit failed due to an internal issue";
 		}
 	}
 	
 }
 else if(ReceiveCommand("get_comments"))
 {
-	if(!isset($SESSION["users"]))
+	if(!isset($_SESSION["users"]))
 	{
-		array_push($ERRORS, "User is not signed in");
+		$ret["msg"]="You are not signed in";
+		array_push($ret["errors"], "UserNotSignedIn");
 	}
 	if($_SESSION["user"]["role"]!="admin")
 	{
-		array_push($ERRORS, "User is not an admin!");
+		$ret["msg"]="You are not an admin";
+		array_push($ret["errors"], "UserNotAdmin");
 	}
 	try
 	{
@@ -185,21 +195,20 @@ else if(ReceiveCommand("get_comments"))
 		$stmt=$db->prepare($query);
 		$stmt->execute();
 		$db->commit();
-		$allComments=$stmt->fetchAll();
 		
-		echo json_encode(array("all_comments"=>$allComments));
+		$allComments=$stmt->fetchAll();
+		$ret["data"]=$allComments;
 	}
 	catch(PDOException $ex)
 	{
 		$db->rollBack();
-		array_push($ERRORS, $ex->getMessage());
+		array_push($ret["errors"], $ex->getMessage());
+		$ret["msg"]="Comments retrieving failed due to an internal issue";
 	}
 }
 
-if(count($ERRORS)!=0)
-{
-	$_SESSION["errors"]=$ERRORS;
-}
+
+echo json_encode($ret);
 
 /////////
 

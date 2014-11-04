@@ -68,8 +68,4 @@ if(count($ERRORS)==0)
 	}
 }
 
-if(count($ERRORS)!=0)
-{
-	$_SESSION["ERRORS"]=$ERRORS;	
-}
 
