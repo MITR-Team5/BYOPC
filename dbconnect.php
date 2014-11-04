@@ -10,13 +10,6 @@ if($_SERVER["HTTP_HOST"]=="localhost")
 	$host = "localhost";
 	$dbname = "bd_byopc";
 }
-else if($_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]=="remindme.go.myrpi.org" || $_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]=="remindme.go.myrpi.org/index.php")
-{
-	$username = "";
-	$password = "";
-	$host = "";
-	$dbname = "";
-}
 else
 {
 	array_push($ERRORS, "Host not recognized. Database connection failed");

@@ -58,17 +58,38 @@ body{
   z-index: 1;
   margin-left: 47%;
 }
+/*#registerButton{
 
+  margin-top: 20%;
+  z-index: 1;
+  margin-left: 47%;
+}*/
+
+#userloginButton{
+  z-index: 1;
+  margin-left: 43%;
+}
+
+/*#userRegisterButton{
+  z-index: 1;
+  margin-left: 47%;
+}
+*/
 #userlogin {
-  background-color: white;
-  color: #100b72;
+/*  background-color: white;*/
   position: absolute;
   margin-top: 18%;
   margin-left: 38%;
-  border-radius: 18px;
+/*  border-radius: 18px;*/
   padding: 6px;
 }
 
+/*#userRegister {
+  position: absolute;
+  margin-top: 18%;
+  margin-left: 38%;
+  padding: 6px;
+}*/
 
 #footer{
   position: relative;

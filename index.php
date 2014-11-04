@@ -1,9 +1,6 @@
-<!doctype html>
-<html>
 <?php
-include("dbconnect.php");
-
 session_start();
+require('dbconnect.php');
 if(!isset($_SESSION["user"]))
 {
 ?>
@@ -45,6 +42,7 @@ if(isset($_SESSION["user"]) && $_SESSION["role"]=="normal")
 	</html>
 <!-- 	echo "User logged in!"; -->
 <?php
+	header("Location:survey.php");
 }
 
 if(count($ERRORS)==0)
@@ -62,6 +60,7 @@ if(count($ERRORS)==0)
 <?php
 }
 ?>
-
-
+<!doctype html>
+<html>
+  <?php include "portalhome.php"; ?>
 </html>
