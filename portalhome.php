@@ -25,22 +25,6 @@
 
 	<input id = "loginButton" type="button" value="Log In" />
 
-<!-- 	<div id="userRegister">
-
-	  <form name="registerInput">
-	    <p>Username: <input type="text" name="username" id="rusername" size="29" maxlength="40" class= "inputfield" required /></p>
-
-	    <p>Password: <input type="password" name="password" id="rpwd" size="30" maxlength="40" class= "inputfield" required /></p>
-
-	    <input id = "userRegisterButton" type="button" value="Register" />
-	    
-
-	  </form>
-
-	</div> -->
-
-	<!-- <input id = "registerButton" type="button" value="Register" /> -->
-
 	
 
 
