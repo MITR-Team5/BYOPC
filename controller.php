@@ -1,5 +1,6 @@
 <?php
 include("dbconnect.php");
+session_start();
 //For testing
 /////////////////////////////////////
 // $_POST["action"]="register";

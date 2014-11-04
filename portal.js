@@ -1,8 +1,8 @@
 $(document).ready(
     function(){
 
-      //$("#userlogin").hide();
-      //$("#loginButton").click(login);
+      $("#userlogin").hide();
+      $("#loginButton").click(login);
       // $("#logoutButton").click(logout);
 	  
       //$("#userRegister").hide();
@@ -12,25 +12,28 @@ $(document).ready(
       //$("#registerButton").click(showregister);
       $("#userRegisterButton").click(sendreg);
 
+
 });
 
 function login() {
-  	if($("#target").text() == "User not logged in!"){
-	    $("#userlogin").show();
-	    $("#loginButton").css("margin-top","30%");
-	    $("#footer").css("margin-top", "10%");
-	    $("#username").focus();
-	}
-	else{
-	    $("#userlogin").show();
-	}
-    $("#userlogin").hide();
+ //  	if($("#target").text() == "User not logged in!"){
+	//     $("#userlogin").show();
+	//     $("#loginButton").css("margin-top","30%");
+	//     $("#footer").css("margin-top", "10%");
+	//     $("#username").focus();
+	// }
+	// else{
+	$("#loginButton").hide();
+	$("#userlogin").show();
+	$("#footer").css("margin-top", "36%");
+	//}
+    //$("#userlogin").hide();
     //$("#userRegister").hide();
-    $("#loginButton").click(showlogin);
+    //$("#loginButton").click(showlogin);
     // $("#logoutButton").click(logout);
-    $("#userloginButton").click(sendlogin);
+    //$("#userloginButton").click(sendlogin);
     //$("#registerButton").click(showregister);
-    $("#userRegisterButton").click(sendreg);
+    //$("#userRegisterButton").click(sendreg);
 
 }
 
@@ -53,6 +56,8 @@ function sendlogin() {
     password:pwd
   },
   function(data,status){
+	  alert(data["msg"]);
+	  
 	  if(data["errors"].length===0)
       {
 		  window.location.assign("login_success.php");

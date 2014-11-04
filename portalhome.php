@@ -23,6 +23,8 @@
 
 	</div>
 
+	<input id = "loginButton" type="button" value="Log In" />
+
 <!-- 	<div id="userRegister">
 
 	  <form name="registerInput">
