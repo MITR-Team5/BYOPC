@@ -4,22 +4,7 @@ $(document).ready(
       $("#userlogin").hide();
       $("#loginButton").click(login);
       // $("#logoutButton").click(logout);
-      
-      //ajax
-      $("#userloginButton").on("click", function(e){
-    	  $.ajax({
-        	  url:"controller.php",
-        	  accepts:"json",
-        	  typr:"POST",
-        	  data:{action:"login", username:$("#username").val(), password:$("#password").val()},
-        	  success:function(data, textStatus, jqXHR){
-        		  alert("Success: "+jqXHR.responseText);
-        		  window.location.assign("login_success.php");
-        	  },
-        	  error:function(jqXHR, textStatus, errorThrown){
-        		  alert(jqXHR.responseText + textStatus + errorThrown);
-        	  }
-          });
+
       });
     
 });
@@ -39,10 +24,9 @@ function login() {
     //$("#userlogin").hide();
     //$("#userRegister").hide();
     //$("#loginButton").click(showlogin);
-    // $("#logoutButton").click(logout);
-    //$("#userloginButton").click(sendlogin);
+    $("#userloginButton").click(sendlogin);
     //$("#registerButton").click(showregister);
-    //$("#userRegisterButton").click(sendreg);
+    $("#userRegisterButton").click(sendreg);
 
 }
 
