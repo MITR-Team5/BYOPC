@@ -15,10 +15,10 @@ session_start();
 // $_POST["action"]="submit_survey";
 // $_POST["questions"]=[["qid"=>1, "value"=>1], ["qid"=>2, "value"=>3], ["qid"=>3, "value"=>2]];
 
-//$_POST["action"]="survey_questions";
+// $_POST["action"]="survey_questions";
 
-// $_POST["action"]="survey_result";
-// $_POST["qid"]=1;
+ $_POST["action"]="survey_result";
+ $_POST["qid"]=1;
 
 // $_POST["action"]="submit_comment";
 // $_POST["value"]="test comment";
