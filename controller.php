@@ -17,8 +17,8 @@ session_start();
 
 // $_POST["action"]="survey_questions";
 
- $_POST["action"]="survey_result";
- $_POST["qid"]=1;
+//  $_POST["action"]="survey_result";
+//  $_POST["qid"]=1;
 
 // $_POST["action"]="submit_comment";
 // $_POST["value"]="test comment";
@@ -318,6 +318,40 @@ else if(ReceiveCommand("get_comments")) // expects SESSION {user:{role}}
 			$db->rollBack();
 			array_push($ret["errors"], $ex->getMessage());
 			$ret["msg"]="Comments retrieving failed due to an internal issue";
+		}
+	}
+}
+else if(ReceiveCommand("get_users")) // expects SESSION{user:{role}}
+{
+	$ret["action"]="get_users";
+	if(!isset($_SESSION["user"]))
+	{
+		$ret["msg"]="You are not signed in";
+		array_push($ret["errors"], "UserNotSignedIn");
+	}
+	else if($_SESSION["user"]["role"]!="admin")
+	{
+		$ret["msg"]="You are not an admin";
+		array_push($ret["errors"], "UserNotAdmin");
+	}
+	else {
+		try
+		{
+			$db->beginTransaction();
+	
+			$query="SELECT * FROM `users`";
+			$stmt=$db->prepare($query);
+			$stmt->execute();
+			$db->commit();
+				
+			$allUsers=$stmt->fetchAll();
+			$ret["data"]=$allUsers;
+		}
+		catch(PDOException $ex)
+		{
+			$db->rollBack();
+			array_push($ret["errors"], $ex->getMessage());
+			$ret["msg"]="Users retrieving failed due to an internal issue";
 		}
 	}
 }
