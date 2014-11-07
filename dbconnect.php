@@ -6,7 +6,7 @@ $ERRORS=array();
 if($_SERVER["HTTP_HOST"]=="localhost")
 {
 	$username = "root";
-	$password = "ch6rles5";
+	$password = "";
 	$host = "localhost";
 	$dbname = "bd_byopc";
 }
