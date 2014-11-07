@@ -3,6 +3,7 @@ $(document).ready(
 
       $("#page1").hide();
       $("#page2").hide();
+      $("#pageEnd").hide();
       $("#nextPage").click(nextpage);
       $("#nextPage2").click(nextpage2);
       $("#submitButton").click(submit);
@@ -24,14 +25,12 @@ function nextpage2() {
   	action:"submit_survey",
     qid:1,
     value:form0
+    type:"YesNo"
   },
   function(data,status){
-	  if(data["errors"].length===0)
-      {
-		  window.location.assign("index.php");
-      }
-	  else
+	  if(data["errors"].length!==0)
 	  {
+
 		  alert("Login failed: "+data["msg"]);
 	  }
   }, "json");
@@ -49,13 +48,11 @@ function submit() {
   	action:"submit_survey",
     qid:2,
     value:form1
+    type:"Numeric"
   },
   function(data,status){
-	  if(data["errors"].length===0)
-      {
-		  window.location.assign("index.php");
-      }
-	  else
+	  if(data["errors"].length!==0)
+
 	  {
 		  alert("Submit failed: "+data["msg"]);
 	  }
@@ -65,13 +62,11 @@ function submit() {
   	action:"submit_survey",
     qid:3,
     value:form2
+    type:"YesNo"
   },
   function(data,status){
-	  if(data["errors"].length===0)
-      {
-		  window.location.assign("index.php");
-      }
-	  else
+	  if(data["errors"].length!==0)
+
 	  {
 		  alert("Submit failed: "+data["msg"]);
 	  }
@@ -81,17 +76,18 @@ function submit() {
   	action:"submit_survey",
     qid:4,
     value:form3
+    type:"YesNo"
   },
   function(data,status){
-	  if(data["errors"].length===0)
+	  if(data["errors"].length!==0)
       {
-		  window.location.assign("index.php");
-      }
-	  else
-	  {
+
 		  alert("Submit failed: "+data["msg"]);
 	  }
   }, "json");
+
+   $("#page2").hide();
+   $("#pageEnd").show("slow");
 }
 
 
