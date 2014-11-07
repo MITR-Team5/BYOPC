@@ -23,7 +23,7 @@ function nextpage2() {
   $.post("controller.php",
   {
   	action:"submit_survey",
-    qid:1,
+    qid:0,
     value:form0
     type:"YesNo"
   },
@@ -46,7 +46,7 @@ function submit() {
   $.post("controller.php",
   {
   	action:"submit_survey",
-    qid:2,
+    qid:1,
     value:form1
     type:"Numeric"
   },
@@ -60,7 +60,7 @@ function submit() {
    $.post("controller.php",
   {
   	action:"submit_survey",
-    qid:3,
+    qid:2,
     value:form2
     type:"YesNo"
   },
@@ -74,7 +74,7 @@ function submit() {
    $.post("controller.php",
   {
   	action:"submit_survey",
-    qid:4,
+    qid:3,
     value:form3
     type:"YesNo"
   },
