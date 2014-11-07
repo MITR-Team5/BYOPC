@@ -4,29 +4,18 @@ $(document).ready(
       $("#userlogin").hide();
       $("#loginButton").click(login);
       // $("#logoutButton").click(logout);
-<<<<<<< HEAD
+
 
       });
     
-=======
-	  
-      //$("#userRegister").hide();
-      $("#loginButton").click(showlogin);
-      // $("#logoutButton").click(logout);
-      $("#userloginButton").click(sendlogin);
-      //$("#registerButton").click(showregister);
-      $("#userRegisterButton").click(sendreg);
 
-
->>>>>>> e0c21bbc3ff4d5cf5420a9622b2d87562c6c0a0c
-});
 
 function login() {
+
 
 	$("#loginButton").hide();
 	$("#userlogin").show();
 	$("#footer").css("margin-top", "36%");
-
     $("#userloginButton").click(sendlogin);
 
     $("#userRegisterButton").click(sendreg);

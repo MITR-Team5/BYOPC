@@ -17,7 +17,7 @@
 
 	    <input id = "userloginButton" type="button" value="Log In" />
 
-	    <input id = "userRegisterButton" type="button" value="Register" />
+	   <!--  <input id = "userRegisterButton" type="button" value="Register" /> -->
 	    
 	  </form>
 

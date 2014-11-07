@@ -27,15 +27,19 @@
 
     <div id= "page1">
     <h2> BD is hoping to cut costs by making employees pay for their own laptops. </h2>
-    <p>Would you like to pay for your work laptop out of your own pocket?&nbsp;&nbsp;&nbsp;Yes<input type="radio" name="yes" value="1">&nbsp;&nbsp;No<input type="radio" name="no" value="0"></p>
+    <form id="form0">Would you like to pay for your work laptop out of your own pocket?&nbsp;&nbsp;&nbsp;Yes<input id="yes1" type="radio" name="yes" value="1">&nbsp;&nbsp;No<input id = "no1" type="radio" name="no" value="0"></form>
     <input id = "nextPage2" type="button" value="Continue" /> 
     </div>
 
-	<div id="form1">
+	<div id="page2">
 
-	  <form name="form1">
+	  <form id="form1">
 	    <p>I am satisfied with my current BD issued laptop&nbsp;&nbsp;&nbsp;1<input type="radio" name="rating" value="1">2<input type="radio" name="rating" value="2">3<input type="radio" name="rating" value="3">4<input type="radio" name="rating" value="4">5<input type="radio" name="rating" value="5"></p>
-	    <p>I currently own a laptop&nbsp;&nbsp;&nbsp;Yes<input type="radio" name="yes" value="1">&nbsp;&nbsp;No<input type="radio" name="no" value="0"></p>
+	  </form>
+	  <form id="form2">
+	    <p>I currently own a personal laptop&nbsp;&nbsp;&nbsp;Yes<input type="radio" name="yes" value="1">&nbsp;&nbsp;No<input type="radio" name="no" value="0"></p>
+	  </form>
+	  <form id="form3">
 	    <p>I would like to bring my personal laptop into the office &nbsp;&nbsp;&nbsp;Yes<input type="radio" name="yes" value="1">&nbsp;&nbsp;No<input type="radio" name="no" value="0"></p>
 	  </form>
 
