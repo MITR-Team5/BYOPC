@@ -1,4 +1,5 @@
 <?php include 'header.php'; ?>
+<body>
 	<img src="bdlogo.png" height="90px" width="250px"> 
     	
     <div id="topbar"></div>
@@ -28,8 +29,10 @@
 	
 
 
+</div>
 
 <?php include 'footer.php'; ?>
 
+</body>
 
 	
