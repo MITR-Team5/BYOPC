@@ -7,6 +7,7 @@ $(document).ready(
       $("#nextPage").click(nextpage);
       $("#nextPage2").click(nextpage2);
       $("#submitButton").click(submit);
+      $("#logoutButton").click(logout);
 
  });
 
@@ -23,15 +24,19 @@ function nextpage2() {
   $.post("controller.php",
   {
   	action:"submit_survey",
-    qid:0,
-    value:form0
-    type:"YesNo"
+  	questions:[
+  	           {
+		  		 qid:1,
+		  	     value:form0
+		  	   }
+  	          ]
+    
   },
   function(data,status){
 	  if(data["errors"].length!==0)
 	  {
 
-		  alert("Login failed: "+data["msg"]);
+		  alert("Submission failed: "+data["msg"]+data["errors"][0]);
 	  }
   }, "json");
 }
@@ -46,9 +51,13 @@ function submit() {
   $.post("controller.php",
   {
   	action:"submit_survey",
-    qid:1,
-    value:form1
-    type:"Numeric"
+  	questions:[
+  	           {
+  	        	 qid:2,
+  	             value:form1 
+  	           }
+  	          ]
+    
   },
   function(data,status){
 	  if(data["errors"].length!==0)
@@ -60,9 +69,13 @@ function submit() {
    $.post("controller.php",
   {
   	action:"submit_survey",
-    qid:2,
-    value:form2
-    type:"YesNo"
+  	questions: [
+  	            {
+  	              qid:3,
+  	              value:form2
+  	            }
+  	           ]
+    
   },
   function(data,status){
 	  if(data["errors"].length!==0)
@@ -74,20 +87,35 @@ function submit() {
    $.post("controller.php",
   {
   	action:"submit_survey",
-    qid:3,
-    value:form3
-    type:"YesNo"
+  	questions:[
+  	           {
+  	        	 qid:4,
+  	             value:form3
+  	           }
+  	          ]
+    
   },
   function(data,status){
 	  if(data["errors"].length!==0)
       {
-
 		  alert("Submit failed: "+data["msg"]);
 	  }
   }, "json");
 
    $("#page2").hide();
    $("#pageEnd").show("slow");
+}
+
+function logout(){
+	$.ajax({
+		url:"controller.php",
+		type:"POST",
+		data:{"action":"logout"},
+		dataType:"json",
+		success:function(data, textStatus, jqXHR){
+			window.location.assign("index.php");
+		}
+	});
 }
 
 

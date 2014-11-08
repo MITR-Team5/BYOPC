@@ -3,27 +3,34 @@ include("dbconnect.php");
 session_start();
 //For testing
 /////////////////////////////////////
-// $_POST["action"]="register";
-// $_POST["username"]="mikeogod1";
-// $_POST["password"]="crazymonkey";
-// $_POST["password_again"]="crazymonkey";
+//  $_POST["action"]="register";
+//  $_POST["username"]="joker";
+//  $_POST["role"]="normal";
+//  $_POST["password"]="crazymonkey";
+//  $_POST["password_again"]="crazymonkey";
 
 // $_POST["action"]="login";
 // $_POST["username"]="mikeogod";
 // $_POST["password"]="crazymonkey";
 
 // $_POST["action"]="submit_survey";
-// $_POST["questions"]=[["qid"=>1, "value"=>1], ["qid"=>2, "value"=>3], ["qid"=>3, "value"=>2]];
+// $_POST["questions"]=[["qid"=>1, "value"=>4, "type"=>"Others"], ["qid"=>2, "value"=>3, "type"=>"Others"], ["qid"=>3, "value"=>2, "type"=>"Others"]];
 
 // $_POST["action"]="survey_questions";
 
 //  $_POST["action"]="survey_result";
 //  $_POST["qid"]=1;
 
+// $_POST["action"]="all_survey_results";
+
 // $_POST["action"]="submit_comment";
 // $_POST["value"]="test comment";
 
 // $_POST["action"]="get_comments";
+
+// $_POST["action"]="get_users";
+
+// $_POST["action"]="logout";
 
 //  session_start();
 //  echo "SESSION: <br />";
@@ -109,7 +116,7 @@ if(ReceiveCommand("login")) // expects POST {"username", "password"}
 	}
 	
 }
-else if(ReceiveCommand("register")) // expects POST {username, password, password_again}
+else if(ReceiveCommand("register")) // expects POST {username, role, password, password_again}
 {
 	$ret["action"]="register";
 	try
@@ -137,13 +144,13 @@ else if(ReceiveCommand("register")) // expects POST {username, password, passwor
 				try 
 				{
 					$db->beginTransaction();
-					$query="INSERT INTO `users`(`username`, `password`,`salt`) VALUES(:username, :password, :salt)";
+					$query="INSERT INTO `users`(`username`, `role`, `password`,`salt`) VALUES(:username, :role, :password, :salt)";
 					$stmt=$db->prepare($query);
 				
 					$salt = dechex(mt_rand(0, 2147483647)) . dechex(mt_rand(0, 2147483647));
 					$password = hash('sha256', $_POST['password'] . $salt);
 				
-					$stmt->execute(array(":username" => $_POST["username"], ":password" => $password, ":salt" => $salt));
+					$stmt->execute(array(":username" => $_POST["username"], ":role"=>$_POST["role"], ":password" => $password, ":salt" => $salt));
 					$db->commit();
 					
 					$ret["msg"]="Register success!";
@@ -169,7 +176,7 @@ else if(ReceiveCommand("register")) // expects POST {username, password, passwor
 		$ret["msg"]="Register failed due to an internal issue";
 	}
 }
-else if(ReceiveCommand("submit_survey")) // expects SESSION {user: {id}} POST{questions: [{"qid", "value"}]}
+else if(ReceiveCommand("submit_survey")) // expects SESSION {user: {id}} POST{questions: [{"qid", "value", "type"}]}
 {
 	$ret["action"]="submit_survey";
 	if(!isset($_SESSION["user"]))
@@ -254,6 +261,90 @@ else if(ReceiveCommand("survey_result")) // expects: SESSION {"user":{"role":"ad
 			$db->rollBack();
 			array_push($ret["errors"], $ex->getMessage());
 			$ret["msg"]="Survey result request failed due to an internal issue";
+		}
+	}
+}
+else if(ReceiveCommand("all_survey_results")) // expects: SESSION {"user":{"role":"admin"}}
+{
+	$ret["action"]="all_survey_results";
+	if(!isset($_SESSION["user"]))
+	{
+		$ret["msg"]="You are not signed in";
+		array_push($ret["errors"], "UserNotSignedIn");
+	}
+	else if($_SESSION["user"]["role"]!="admin")
+	{
+		$ret["msg"]="You are not an admin";
+		array_push($ret["errors"], "UserNotAdmin");
+	}
+	else{
+		try
+		{
+			$db->beginTransaction();
+			$query="SELECT `survey_questions`.`id`, `survey_questions`.`desc`, `survey_questions`.`type`, `survey_results`.`surveyid`, `survey_results`.`value` 
+					FROM `survey_questions` INNER JOIN `survey_results` WHERE `survey_questions`.`id`=`survey_results`.`surveyid`";
+			$stmt=$db->prepare($query);
+			$stmt->execute();
+			$rawResult=$stmt->fetchAll();
+			$db->commit();
+			
+			$numberCounts=array_fill(1, 1000, array_fill(1, 5, 0));
+			$boolCounts=array_fill(1, 1000, array(0=>0, 1=>0));
+			$maxId=0;
+			foreach($rawResult as $record)
+			{
+				if($maxId<$record["surveyid"])
+				{
+					$maxId=$record["surveyid"];		
+				}
+				
+				
+				if($record["type"]=="Numeric" || $record["type"]=="Others")
+				{
+					$numberCounts[intval($record["surveyid"])][intval($record["value"])]+=1;
+				}
+				else if($record["type"]=="YesNo")
+				{
+					if(intval($record["value"])==0)
+					{
+						$boolCounts[intval($record["surveyid"])][0]+=1;
+					}
+					else 
+					{
+						$boolCounts[intval($record["surveyid"])][1]+=1;
+					}
+					
+				}
+			}
+			
+			
+			$startingId=1;
+			$endingId=$maxId;
+			
+			$ret["data"]=array("yesno"=>array(), "numeric"=>array(), "text"=>array(), "others"=>array());
+			foreach($boolCounts as $qid=>$qResult)
+			{
+				if($qResult[0]+$qResult[1]!=0)
+				{
+					array_push($ret["data"]["yesno"], array("id"=>$qid, "result"=>$qResult));
+				}
+				
+			}
+			foreach($numberCounts as $qid=>$qResult)
+			{
+				if(array_sum($qResult)!=0)
+				{
+					array_push($ret["data"]["numeric"], array("id"=>$qid, "result"=>$qResult));
+				}
+			}
+			
+			
+		}
+		catch(PDOException $ex)
+		{
+			$db->rollBack();
+			array_push($ret["errors"], $ex->getMessage());
+			$ret["msg"]="All survey results request failed due to an internal issue";
 		}
 	}
 }
@@ -354,6 +445,15 @@ else if(ReceiveCommand("get_users")) // expects SESSION{user:{role}}
 			$ret["msg"]="Users retrieving failed due to an internal issue";
 		}
 	}
+}
+else if(ReceiveCommand("logout"))
+{
+	$ret["action"]="logout";
+	unset($_SESSION["user"]);
+	setcookie(session_name(), '', time() - 72000);
+	session_destroy();
+	$ret["msg"]="You are logged out";
+	
 }
 
 echo json_encode($ret);

@@ -10,9 +10,7 @@
 </head>
 
 	<img src="bdlogo.png" height="90px" width="250px"> 
-
-	<input id = "logoutButton" type="button" value = "Logout" />
-    	
+	<button id = "logoutButton">Logout</button>
     <div id="topbar"></div>
     <div id="middlebar"></div>
     <div id="bottombar"></div>
