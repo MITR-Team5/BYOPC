@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2014 at 09:27 PM
+-- Generation Time: Nov 08, 2014 at 06:26 PM
 -- Server version: 5.5.32
 -- PHP Version: 5.4.19
 
@@ -29,18 +29,12 @@ USE `bd_byopc`;
 --
 
 CREATE TABLE IF NOT EXISTS `comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `value` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `username` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'Anonymous'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `comments`
---
-
-INSERT INTO `comments` (`created_at`, `value`, `username`) VALUES
-('0000-00-00 00:00:00', 'test comment', NULL),
-('0000-00-00 00:00:00', 'test comment', 'mikeogod');
+  `username` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'Anonymous',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -52,17 +46,19 @@ CREATE TABLE IF NOT EXISTS `survey_questions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `desc` varchar(2000) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `type` set('YesNo','Numeric','Text','Others') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Others',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `survey_questions`
 --
 
-INSERT INTO `survey_questions` (`id`, `desc`, `created_at`) VALUES
-(1, 'desc0', '2014-11-04 18:04:26'),
-(2, 'desc1', '2014-11-04 18:04:26'),
-(3, 'desc2', '2014-11-04 18:04:26');
+INSERT INTO `survey_questions` (`id`, `desc`, `created_at`, `type`) VALUES
+(1, 'desc0', '2014-11-04 18:04:26', 'YesNo'),
+(2, 'desc1', '2014-11-04 18:04:26', 'Numeric'),
+(3, 'desc2', '2014-11-04 18:04:26', 'YesNo'),
+(4, 'desc3', '2014-11-08 00:46:30', 'YesNo');
 
 -- --------------------------------------------------------
 
@@ -79,16 +75,17 @@ CREATE TABLE IF NOT EXISTS `survey_results` (
   PRIMARY KEY (`id`),
   KEY `userid` (`userid`),
   KEY `surveyid` (`surveyid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=39 ;
 
 --
 -- Dumping data for table `survey_results`
 --
 
 INSERT INTO `survey_results` (`id`, `userid`, `surveyid`, `value`, `created_at`) VALUES
-(2, 1, 1, 1, '2014-11-04 18:10:38'),
-(3, 1, 2, 3, '2014-11-04 18:10:38'),
-(4, 1, 3, 2, '2014-11-04 18:10:38');
+(35, 4, 1, 1, '2014-11-08 17:09:46'),
+(36, 4, 4, 1, '2014-11-08 17:09:55'),
+(37, 4, 2, 5, '2014-11-08 17:09:55'),
+(38, 4, 3, 0, '2014-11-08 17:09:55');
 
 -- --------------------------------------------------------
 
@@ -99,19 +96,19 @@ INSERT INTO `survey_results` (`id`, `userid`, `surveyid`, `value`, `created_at`)
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `role` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'normal',
+  `role` set('normal','admin') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'normal',
   `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `salt` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `role`, `password`, `salt`) VALUES
-(1, 'mikeogod', 'admin', 'b1d86f0775cbd7faf23b2f36977f5eb08a4ef148b474c76edc81999fe4ffe222', '46d42d7a783f21ad'),
-(2, 'mikeogod1', 'normal', '46b9c44ff9ffc04f3eae44a9c2597ffc72318a460d85a4e02762f9873193ddc6', '25d4f02612c8301d');
+(3, 'mike', 'admin', '9c01c96cd422112c19494de74ef52bab3caab6b2fb9d9ebe5b3a66faf313d9f1', '3c1935ca170b6614'),
+(4, 'joker', 'normal', 'c8b939ea3d14bae4b5181da2b2b57f8b542e3cb639882ba83ffeba41f27599d1', '1c71b27a1dee24bd');
 
 --
 -- Constraints for dumped tables
