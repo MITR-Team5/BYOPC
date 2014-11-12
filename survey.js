@@ -35,7 +35,6 @@ function nextpage2() {
   function(data,status){
 	  if(data["errors"].length!==0)
 	  {
-
 		  alert("Submission failed: "+data["msg"]+data["errors"][0]);
 	  }
   }, "json");

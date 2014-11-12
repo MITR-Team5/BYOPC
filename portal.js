@@ -63,7 +63,8 @@ function sendreg() {
       }
 	  else
 	  {
-		  alert("Login failed: "+data["msg"]);
+		  
+		  alert("Register failed: "+data["msg"]);
 	  }
   }, "json");
 }

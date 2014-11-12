@@ -188,19 +188,39 @@ else if(ReceiveCommand("submit_survey")) // expects SESSION {user: {id}} POST{qu
 	{
 		try
 		{
+			
 			$db->beginTransaction();
 			
+			
+			$dupAnswer=false;
 			$surveyQuestions=$_POST["questions"];
 			foreach($surveyQuestions as $q)
 			{
 				$qid=$q["qid"];
-				$value=$q["value"];
-				$query="INSERT INTO `survey_results`(`userid`, `surveyid`, `value`) VALUES (:userid, :surveyid, :value)";
+				
+				$query="SELECT * FROM `survey_results` WHERE `userid`=:userid AND `surveyid`=:surveyid";
 				$stmt=$db->prepare($query);
-				$stmt->execute([":userid"=>$_SESSION["user"]["id"], ":surveyid"=>$qid, ":value"=>$value]);
+				$stmt->execute([":userid"=>$_SESSION["user"]["id"], ":surveyid"=>$qid]);
+				if($stmt->fetch()==true)
+				{
+					$dupAnswer=true;
+					$ret["msg"].="You have already answered question $qid\n";
+					array_push($ret["errors"], "ResubmittingAnswer");
+				}
+				else 
+				{
+					$value=$q["value"];
+					$query="INSERT INTO `survey_results`(`userid`, `surveyid`, `value`) VALUES (:userid, :surveyid, :value)";
+					$stmt=$db->prepare($query);
+					$stmt->execute([":userid"=>$_SESSION["user"]["id"], ":surveyid"=>$qid, ":value"=>$value]);
+				}
 			}
 			$db->commit();
-			$ret["msg"]="Survey has been successfully submitted";
+			if(!$dupAnswer)
+			{
+				$ret["msg"]="Survey has been successfully submitted";
+			}
+			
 		}
 		catch(PDOException $ex)
 		{
