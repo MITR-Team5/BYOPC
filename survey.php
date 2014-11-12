@@ -1,3 +1,19 @@
+<?php 
+session_start();
+if(isset($_SESSION["user"]) && $_SESSION["user"]["role"]=="normal")
+{
+	header("Location: survey.php");
+}
+else if(isset($_SESSION["user"]) && $_SESSION["user"]["role"]=="admin")
+{
+	header("Location: admin.php");
+}
+else
+{
+	header("Location: index.php");
+}
+
+?>
 <head>
 	<!--<script src="pong.js"> </script>
 	<script src="jquery-2.0.3.min.js"></script>-->
