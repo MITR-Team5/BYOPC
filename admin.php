@@ -5,30 +5,9 @@
 	<script src="survey.js"></script>
 	<title>BYO-PC @ BD
 	</title>
-	<link rel="stylesheet" type="text/css" href="survey.css">
+	<link rel="stylesheet" type="text/css" href="admin.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
-	<style>
-		#content{
-			color: black;
-		}
-		#users-table{
-			width: 60%;
-			margin: auto;
-			border-collapse: collapse;
-		}
-		#users-table td, #users-table th{
-			border: 1px solid black;
-    		text-align:center;
-		}
-		#survey-results-container{
-			width: 60%;
-			margin: auto;
-			
-		}
-	</style>
-	<script>
-		
-	</script>
+
 </head>
 <!-- Chart -->
 <script src="Chart.js"></script>
@@ -136,6 +115,8 @@
 						}
 					});
 					
+					setTimeout(function(){ getHeight();},100);
+					
 				}
 				else
 				{
@@ -145,6 +126,8 @@
 			error:function(jqXHR, textStatus, errorThrown){
 				alert("error!");
 			}
+
+
 		});
 
 		function GetDescription(questions, id)
@@ -159,6 +142,11 @@
 			return "Unknown question";
 		}
 
+		function getHeight() {
+			alert($("#middlebar").height());
+			alert($("#survey-results").outerHeight());
+			$("#middlebar").height($("#middlebar").height() + $("#content").innerHeight());
+		}
 	});
 </script>
 
@@ -167,6 +155,8 @@
 <button id = "logoutButton" value = "Logout">Logout</button>
     	
 <div id="topbar"></div>
+<div id="middlebar"></div>
+
 
 
 <div id="content">
@@ -185,6 +175,9 @@
 	</div>
 	
 </div>
+
+<div id="bottombar"></div>
+
 <?php 
 	include('footer.php');
 ?>
