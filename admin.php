@@ -6,7 +6,7 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"]=="normal")
 }
 else if(isset($_SESSION["user"]) && $_SESSION["user"]["role"]=="admin")
 {
-	header("Location: admin.php");
+	
 }
 else
 {
