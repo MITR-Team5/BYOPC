@@ -4,7 +4,7 @@ session_start();
 //For testing
 /////////////////////////////////////
 //  $_POST["action"]="register";
-//  $_POST["username"]="joker";
+//  $_POST["username"]="Kat";
 //  $_POST["role"]="normal";
 //  $_POST["password"]="crazymonkey";
 //  $_POST["password_again"]="crazymonkey";

@@ -81,7 +81,7 @@ else
 									    labels : ["Yes", "No"],
 									    datasets : [
 								    	    {
-											    fillColor : "rgba(0,220,220,0.5)",
+											    fillColor : "rgba(225,79,1,1)",
 											    strokeColor : "rgba(220,220,220,1)",
 											    data : [result[1], result[0]]
 										    }
@@ -108,7 +108,7 @@ else
 									    labels : ["1", "2", "3", "4", "5"],
 									    datasets : [
 								    	    {
-											    fillColor : "rgba(0,220,220,0.5)",
+											    fillColor : "rgba(225,79,1,1)",
 											    strokeColor : "rgba(220,220,220,1)",
 											    data : [result["1"], result["2"], result["3"], result["4"], result["5"]]
 										    }
@@ -158,12 +158,18 @@ else
 		}
 
 		function getHeight() {
-			alert($("#middlebar").height());
-			alert($("#survey-results").outerHeight());
+			//alert($("#middlebar").height());
+			//alert($("#survey-results").outerHeight());
 			$("#middlebar").height($("#middlebar").height() + $("#content").innerHeight());
 		}
 	});
 </script>
+
+<style>
+	#survey-results-container canvas{
+		background-color:white;
+	}
+</style>
 
 <img src="bdlogo.png" height="90px" width="250px"> 
 
