@@ -158,8 +158,8 @@ else
 		}
 
 		function getHeight() {
-			alert($("#middlebar").height());
-			alert($("#survey-results").outerHeight());
+			//alert($("#middlebar").height());
+			//alert($("#survey-results").outerHeight());
 			$("#middlebar").height($("#middlebar").height() + $("#content").innerHeight());
 		}
 	});
