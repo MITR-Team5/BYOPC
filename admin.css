@@ -76,19 +76,19 @@ body{
   margin-left: 75%;
 }
 
-#users-table{
+#users-table-participate, #users-table-decline, #users-table-undecided{
   width: 60%;
   margin: auto;
   border-collapse: collapse;
 }
 
-#users-table td{
+#users-table-participate td, #users-table-decline td, #users-table-undecided td{
   border: 1px solid white;
   text-align:center;
   color: white;
 }
 
-#users-table th{
+#users-table-participate th, #users-table-decline th, #users-table-undecided th{
   border: 1px solid white;
   text-align:center;
   background-color: white;

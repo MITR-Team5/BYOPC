@@ -13,8 +13,18 @@ session_start();
 // $_POST["username"]="mikeogod";
 // $_POST["password"]="crazymonkey";
 
+// $_POST["action"]="participate";
+// $_POST["model"]="ThinkPad 420";
+// $_POST["os"]="WIN7";
+// $_POST["comment"]="I want to participate!";
+
+// $_POST["action"]="decline";
+// $_POST["comment"]="That's too expensive!";
+
 // $_POST["action"]="submit_survey";
 // $_POST["questions"]=[["qid"=>1, "value"=>4, "type"=>"Others"], ["qid"=>2, "value"=>3, "type"=>"Others"], ["qid"=>3, "value"=>2, "type"=>"Others"]];
+
+// $_POST["action"]="complete_survey";
 
 // $_POST["action"]="survey_questions";
 
@@ -22,11 +32,6 @@ session_start();
 //  $_POST["qid"]=1;
 
 // $_POST["action"]="all_survey_results";
-
-// $_POST["action"]="submit_comment";
-// $_POST["value"]="test comment";
-
-// $_POST["action"]="get_comments";
 
 // $_POST["action"]="get_users";
 
@@ -176,6 +181,72 @@ else if(ReceiveCommand("register")) // expects POST {username, role, password, p
 		$ret["msg"]="Register failed due to an internal issue";
 	}
 }
+else if(ReceiveCommand("participate"))// expects SESSION {user: {id}} POST{model, os, comment}
+{
+	$ret["action"]="participate";
+	if(!isset($_SESSION["user"]))
+	{
+		$ret["msg"]="You are not signed in";
+		array_push($ret["errors"], "UserNotSignedIn");
+	}
+	else 
+	{
+		try
+		{
+			$db->beginTransaction();
+			$query="UPDATE `users` SET `model`=:model, `os`=:os, `comment`=:comment, `participate`=1 WHERE `id`=:id";
+			$stmt=$db->prepare($query);
+			$succ=$stmt->execute([":id"=>$_SESSION["user"]["id"], ":model"=>$_POST["model"], ":os"=>$_POST["os"], ":comment"=>$_POST["comment"]]);
+			if($succ)
+			{
+				$db->commit();
+				$ret["msg"]="You have successfully registered your information to BYOPC program";
+			}
+			else
+			{
+				$db->rollBack();
+				$errors=$stmt->errorInfo();
+				array_push($ret["errors"], implode("|", $errors));
+				$ret["msg"]="Participation information submission failed due to an internal error";
+			}
+		}
+		catch(PDOException $ex)
+		{
+			$db->rollBack();
+			array_push($ret["errors"], $ex->getMessage());
+			$ret["msg"]="Participation information failed due to an internal issue";
+		}
+	}
+}
+else if(ReceiveCommand("decline"))// expects SESSION {user: {id}} POST{comment}
+{
+	$ret["action"]="decline";
+	try
+	{
+		$db->beginTransaction();
+		$query="UPDATE `users` SET `comment`=:comment, `participate`=0 WHERE `id`=:id";
+		$stmt=$db->prepare($query);
+		$succ=$stmt->execute([":id"=>$_SESSION["user"]["id"], ":comment"=>$_POST["comment"]]);
+		if($succ)
+		{
+			$db->commit();
+			$ret["msg"]="You have declined to participate in BYOPC program";
+		}
+		else
+		{
+			$db->rollBack();
+			$errors=$stmt->errorInfo();
+			array_push($ret["errors"], implode("|", $errors));
+			$ret["msg"]="Declination failed due to an internal error";
+		}
+	}
+	catch(PDOException $ex)
+	{
+		$db->rollBack();
+		array_push($ret["errors"], $ex->getMessage());
+		$ret["msg"]="Declination failed due to an internal issue";
+	}
+}
 else if(ReceiveCommand("submit_survey")) // expects SESSION {user: {id}} POST{questions: [{"qid", "value", "type"}]}
 {
 	$ret["action"]="submit_survey";
@@ -228,6 +299,37 @@ else if(ReceiveCommand("submit_survey")) // expects SESSION {user: {id}} POST{qu
 			array_push($ret["errors"], $ex->getMessage());
 			$ret["msg"]="Survey submission failed due to an internal issue";
 		}
+	}
+}
+//Call this after the last question of the survey is submitted
+else if(ReceiveCommand("complete_survey"))// expects SESSION {user: {id}}
+{
+	$ret["action"]="complete_survey";
+	try
+	{
+		$db->beginTransaction();
+
+		$query="UPDATE `users` SET `completed`=1 WHERE `id`=:id";
+		$stmt=$db->prepare($query);
+		$succ=$stmt->execute([":id"=>$_SESSION["user"]["id"]]);
+		if($succ)
+		{
+			$db->commit();
+				
+		}
+		else
+		{
+			$db->rollBack();
+			$errors=$stmt->errorInfo();
+			array_push($ret["errors"], implode("|", $errors));
+			$ret["msg"]="Survey completion failed due to an internal error";
+		}
+	}
+	catch(PDOException $ex)
+	{
+		$db->rollBack();
+		array_push($ret["errors"], $ex->getMessage());
+		$ret["msg"]="Survey completion failed due to an internal issue";
 	}
 }
 else if(ReceiveCommand("survey_questions")) // expects POST{}
@@ -368,71 +470,7 @@ else if(ReceiveCommand("all_survey_results")) // expects: SESSION {"user":{"role
 		}
 	}
 }
-else if(ReceiveCommand("submit_comment")) //expects: SESSION{user:{username, }} POST{value}
-{
-	$ret["action"]="submit_comment";
-	if(!isset($_SESSION["user"]))
-	{
-		$ret["msg"]="You are not signed in";
-		array_push($ret["errors"], "UserNotSignedIn");
-	}
-	else
-	{
-		try
-		{
-			$db->beginTransaction();
-		
-			$query="INSERT INTO `comments`(`value`, `user`) VALUES(:value, :username)";
-			$stmt=$db->prepare($query);
-			$stmt->execute(array(":value"=>$_POST["value"], ":username"=>$_SESSION["user"]["username"]));
-			$db->commit();
-			
-			$ret["msg"]="The comment has been successfully submitted";
-		}
-		catch(PDOException $ex)
-		{
-			$db->rollBack();
-			array_push($ret["errors"], $ex->getMessage());
-			$ret["msg"]="Comment submit failed due to an internal issue";
-		}
-	}
-	
-}
-else if(ReceiveCommand("get_comments")) // expects SESSION {user:{role}}
-{
-	$ret["action"]="get_comments";
-	if(!isset($_SESSION["user"]))
-	{
-		$ret["msg"]="You are not signed in";
-		array_push($ret["errors"], "UserNotSignedIn");
-	}
-	else if($_SESSION["user"]["role"]!="admin")
-	{
-		$ret["msg"]="You are not an admin";
-		array_push($ret["errors"], "UserNotAdmin");
-	}
-	else {
-		try
-		{
-			$db->beginTransaction();
-		
-			$query="SELECT * FROM `comments`";
-			$stmt=$db->prepare($query);
-			$stmt->execute();
-			$db->commit();
-			
-			$allComments=$stmt->fetchAll();
-			$ret["data"]=$allComments;
-		}
-		catch(PDOException $ex)
-		{
-			$db->rollBack();
-			array_push($ret["errors"], $ex->getMessage());
-			$ret["msg"]="Comments retrieving failed due to an internal issue";
-		}
-	}
-}
-else if(ReceiveCommand("get_users")) // expects SESSION{user:{role}}
+else if(ReceiveCommand("get_users")) // expects SESSION{user:{role}} returns: {"particiate"=>array of users, "decline"=>array of user, "undecided"=>array of user}
 {
 	$ret["action"]="get_users";
 	if(!isset($_SESSION["user"]))
@@ -449,14 +487,26 @@ else if(ReceiveCommand("get_users")) // expects SESSION{user:{role}}
 		try
 		{
 			$db->beginTransaction();
-	
-			$query="SELECT * FROM `users`";
+			$users=["participate"=>[], "decline"=>[], "undecided"=>[]];
+			
+			$query="SELECT * FROM `users` WHERE `participate`=1";
 			$stmt=$db->prepare($query);
 			$stmt->execute();
+			$users["participate"]=$stmt->fetchAll();
+			
+			$query="SELECT * FROM `users` WHERE `participate`=0";
+			$stmt=$db->prepare($query);
+			$stmt->execute();
+			$users["decline"]=$stmt->fetchAll();
+			
+			$query="SELECT * FROM `users` WHERE `participate`=-1";
+			$stmt=$db->prepare($query);
+			$stmt->execute();
+			$users["undecided"]=$stmt->fetchAll();
+			
 			$db->commit();
 				
-			$allUsers=$stmt->fetchAll();
-			$ret["data"]=$allUsers;
+			$ret["data"]=$users;
 		}
 		catch(PDOException $ex)
 		{
@@ -474,6 +524,10 @@ else if(ReceiveCommand("logout"))
 	session_destroy();
 	$ret["msg"]="You are logged out";
 	
+}
+else 
+{
+	$ret["msg"]="Action not valid";
 }
 
 echo json_encode($ret);

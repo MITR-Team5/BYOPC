@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2014 at 01:37 AM
+-- Generation Time: Nov 16, 2014 at 12:51 AM
 -- Server version: 5.5.32
 -- PHP Version: 5.4.19
 
@@ -107,6 +107,11 @@ CREATE TABLE IF NOT EXISTS `users` (
   `role` set('normal','admin') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'normal',
   `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `salt` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `completed` tinyint(1) NOT NULL DEFAULT '0',
+  `participate` int(1) NOT NULL DEFAULT '-1',
+  `model` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'unspecified',
+  `os` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'unspecified',
+  `comment` varchar(2000) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
@@ -114,11 +119,11 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `role`, `password`, `salt`) VALUES
-(3, 'mike', 'admin', '9c01c96cd422112c19494de74ef52bab3caab6b2fb9d9ebe5b3a66faf313d9f1', '3c1935ca170b6614'),
-(4, 'joker', 'normal', 'c8b939ea3d14bae4b5181da2b2b57f8b542e3cb639882ba83ffeba41f27599d1', '1c71b27a1dee24bd'),
-(5, 'joe', 'normal', '122024dbde90dacfd02736b1fda1a2e64eb4b34edc30acc3c2b703b51ff87068', '3aca586d37051418'),
-(6, 'Kat', 'normal', '17cc96c9835e4016ddba42b3497709460b47584538d2e69b996746af0421e2ed', '9c8d91eb72ea3b');
+INSERT INTO `users` (`id`, `username`, `role`, `password`, `salt`, `completed`, `participate`, `model`, `os`, `comment`) VALUES
+(3, 'mike', 'admin', '9c01c96cd422112c19494de74ef52bab3caab6b2fb9d9ebe5b3a66faf313d9f1', '3c1935ca170b6614', 1, 0, 'ThinkPad 420', 'WIN7', 'That''s too expensive!'),
+(4, 'joker', 'normal', 'c8b939ea3d14bae4b5181da2b2b57f8b542e3cb639882ba83ffeba41f27599d1', '1c71b27a1dee24bd', 0, -1, 'unspecified', 'unspecified', NULL),
+(5, 'joe', 'normal', '122024dbde90dacfd02736b1fda1a2e64eb4b34edc30acc3c2b703b51ff87068', '3aca586d37051418', 0, -1, 'unspecified', 'unspecified', NULL),
+(6, 'Kat', 'normal', '17cc96c9835e4016ddba42b3497709460b47584538d2e69b996746af0421e2ed', '9c8d91eb72ea3b', 0, -1, 'unspecified', 'unspecified', NULL);
 
 --
 -- Constraints for dumped tables

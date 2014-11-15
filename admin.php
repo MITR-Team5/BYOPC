@@ -36,13 +36,39 @@ else
 			success:function(data, textStatus, jqXHR){
 				if(data["errors"].length==0)
 				{
-					for(var i=0; i!=data["data"].length; i++)
+					for(var i=0; i!=data["data"]["participate"].length; i++)
 					{
+						var user=data["data"]["participate"][i];
 						var row="<tr>";
-						row+="<td>"+data["data"][i]["username"]+"</td>";
-						row+="<td>"+data["data"][i]["role"]+"</td>";
+						row+="<td>"+user["username"]+"</td>";
+						row+="<td>"+user["model"]+"</td>";
+						row+="<td>"+user["os"]+"</td>";
+						row+="<td>"+user["comment"]+"</td>";
+						row+="<td>"+(user["completed"]==1 ? "Yes":"No")+"</td>";
 						row+="</tr>";
-						$("#users-table").append(row);
+						$("#users-table-participate").append(row);
+					}
+					for(var i=0; i!=data["data"]["decline"].length; i++)
+					{
+						var user=data["data"]["decline"][i];
+						var row="<tr>";
+						row+="<td>"+user["username"]+"</td>";
+						row+="<td>"+user["comment"]+"</td>";
+						row+="<td>"+(user["completed"]==1 ? "Yes":"No")+"</td>";
+						row+="</tr>";
+						$("#users-table-decline").append(row);
+					}
+					for(var i=0; i!=data["data"]["undecided"].length; i++)
+					{
+						var user=data["data"]["undecided"][i];
+						var row="<tr>";
+						row+="<td>"+user["username"]+"</td>";
+						row+="<td>"+user["model"]+"</td>";
+						row+="<td>"+user["os"]+"</td>";
+						row+="<td>"+user["comment"]+"</td>";
+						row+="<td>"+(user["completed"]==1?"Yes":"No")+"</td>";
+						row+="</tr>";
+						$("#users-table-undecided").append(row);
 					}
 				}
 				else
@@ -182,13 +208,33 @@ else
 
 <div id="content">
 	
-	<p>All users:</p>
+	
 	<div id="users-container">
-		<table id="users-table">
+		<p>Participating users:</p>
+		<table id="users-table-participate">
 			<th>User Name</th>
-			<th>Role</th>
+			<th>Model</th>
+			<th>OS</th>
+			<th>Comment</th>
+			<th>Survey Completed</th>
+		</table>
+		<p>Declined users:</p>
+		<table id="users-table-decline">
+			<th>User Name</th>
+			<th>Comment</th>
+			<th>Survey Completed</th>
+		</table>
+		<p>Undecided users:</p>
+		<table id="users-table-undecided">
+			<th>User Name</th>
+			<th>Model</th>
+			<th>OS</th>
+			<th>Comment</th>
+			<th>Survey Completed</th>
 		</table>
 	</div>
+	
+	<p>
 	<p>Survey Results:</p>
 	<div id="survey-results">
 		<div id="survey-results-container">
