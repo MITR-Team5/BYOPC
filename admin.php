@@ -14,16 +14,16 @@ else
 }
 ?>
 <head>
-	<!--<script src="pong.js"> </script>
-	<script src="jquery-2.0.3.min.js"></script>-->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="survey.js"></script>
 	<title>BYO-PC @ BD
 	</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="survey.js"></script>
+	<script src="Chart.js"></script>
 	<link rel="stylesheet" type="text/css" href="admin.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
 
 </head>
+
 <!-- Chart -->
 <script src="Chart.js"></script>
 <script>
@@ -39,7 +39,7 @@ else
 					for(var i=0; i!=data["data"].length; i++)
 					{
 						var row="<tr>";
-						row+="<td>"+data["data"][i]["username"]+"</td>";
+						row+="<td><a href='#'" + data["data"][i]["username"]+"></a></td>";
 						row+="<td>"+data["data"][i]["role"]+"</td>";
 						row+="</tr>";
 						$("#users-table").append(row);
@@ -217,6 +217,7 @@ else
 </script>
 
 
+
 <img src="bdlogo.png" height="90px" width="250px"> 
 
 <button id = "logoutButton" value = "Logout">Logout</button>
@@ -228,13 +229,33 @@ else
 
 <div id="content">
 	
-	<p>All users:</p>
+	
 	<div id="users-container">
-		<table id="users-table">
+		<p>Participating users:</p>
+		<table id="users-table-participate">
 			<th>User Name</th>
-			<th>Role</th>
+			<th>Model</th>
+			<th>OS</th>
+			<th>Comment</th>
+			<th>Survey Completed</th>
+		</table>
+		<p>Declined users:</p>
+		<table id="users-table-decline">
+			<th>User Name</th>
+			<th>Comment</th>
+			<th>Survey Completed</th>
+		</table>
+		<p>Undecided users:</p>
+		<table id="users-table-undecided">
+			<th>User Name</th>
+			<th>Model</th>
+			<th>OS</th>
+			<th>Comment</th>
+			<th>Survey Completed</th>
 		</table>
 	</div>
+	
+	<p>
 	<p>Survey Results:</p>
 	<div id="survey-results">
 		<div id="survey-results-container">
