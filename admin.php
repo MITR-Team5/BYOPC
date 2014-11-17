@@ -77,54 +77,105 @@ else
 								{
 									var qid=data["data"]["yesno"][i]["id"];
 									var result=data["data"]["yesno"][i]["result"];
-									var chartData={
-									    labels : ["Yes", "No"],
-									    datasets : [
-								    	    {
-											    fillColor : "rgba(225,79,1,1)",
-											    strokeColor : "rgba(220,220,220,1)",
-											    data : [result[1], result[0]]
+									var chartData=
+									// {
+									//     labels : ["Yes", "No"],
+									//     datasets : [
+								 //    	    {
+									// 		    fillColor : "rgba(225,79,1,1)",
+									// 		    strokeColor : "rgba(220,220,220,1)",
+									// 		    data : [result[1], result[0]]
+									// 	    }
+									//     ]
+									    [
+									    	{
+										    	value: result[0],
+										    	color: "#F7464A",
+										    	highlight: "#FF5A5E",
+										    	label: "No"
+										    },
+										    {
+										    	value: result[1],
+										    	color: "#46BFBD",
+        										highlight: "#5AD3D1",
+        										label: "Yes"
 										    }
-									    ]
-									}
-									var maxHeight=Math.max(result[1], result[0]);
+										];
+									//}
+									//var maxHeight=Math.max(result[1], result[0]);
 									var desc=GetDescription(allQuestions, qid);
-									$("#survey-results-container").append("<p>Result for question ID "+qid+": "+desc+"</p><canvas width='800' height='400'></canvas>");
+									$("#survey-results-container").append("<p>Result for question ID "+qid+": "+desc+"</p><canvas width='400' height='400'></canvas>");
 									var canvas=$("#survey-results-container canvas").last().get(0);
 									var ctx = canvas.getContext("2d");
-									var chart = new Chart(ctx).Bar(chartData, {	
-										scaleOverlay : false,
-										scaleOverride : true,
-										scaleSteps : maxHeight+2,
-										scaleStepWidth : 1,
-										scaleStartValue : 0
-									});
+									var chart = new Chart(ctx).Pie(chartData);
+									// , {	
+									// 	scaleOverlay : false,
+									// 	scaleOverride : true,
+									// 	scaleSteps : maxHeight+2,
+									// 	scaleStepWidth : 1,
+									// 	scaleStartValue : 0
+									// });
 								}
 								for(var i=0; i!=data["data"]["numeric"].length; i++)
 								{
 									var qid=data["data"]["numeric"][i]["id"];
 									var result=data["data"]["numeric"][i]["result"];
-									var chartData={
-									    labels : ["1", "2", "3", "4", "5"],
-									    datasets : [
-								    	    {
-											    fillColor : "rgba(225,79,1,1)",
-											    strokeColor : "rgba(220,220,220,1)",
-											    data : [result["1"], result["2"], result["3"], result["4"], result["5"]]
-										    }
-									    ]
-									};
+									var chartData=
+									// {
+									//     labels : ["1", "2", "3", "4", "5"],
+									//     datasets : [
+								 //    	    {
+									// 		    fillColor : "rgba(225,79,1,1)",
+									// 		    strokeColor : "rgba(220,220,220,1)",
+									// 		    data : [result["1"], result["2"], result["3"], result["4"], result["5"]]
+									// 	    }
+									//     ]
+									// };
+									[
+										{
+											value: result["1"],
+											color: "#CC66FF",
+											highlight: "#D685FF",
+											label: "1"
+
+										},
+									    {
+										   	value: result["2"],
+										   	color: "#F7464A",
+										   	highlight: "#FF5A5E",
+										   	label: "2"
+										},
+										{
+										   	value: result["3"],
+										   	color: "#46BFBD",
+        									highlight: "#5AD3D1",
+        									label: "3"
+										},
+										{
+											value: result["4"],
+											color: "#33AD5C",
+											highlight: "#5CBD7D",
+											label: "4"
+										},
+										{
+											value: result["5"],
+											color: "#FF9933",
+											highlight: "#FFAD5C",
+											label: "5"
+										}
+									]
 									var maxHeight=Math.max(result["1"], result["2"], result["3"], result["4"], result["5"]);
-									$("#survey-results-container").append("<p>Result for question ID "+qid+": "+desc+"</p><canvas width='800' height='400'></canvas>");
+									$("#survey-results-container").append("<p>Result for question ID "+qid+": "+desc+"</p><canvas width='400' height='400'></canvas>");
 									var canvas=$("#survey-results-container canvas").last().get(0);
 									var ctx = canvas.getContext("2d");
-									var chart = new Chart(ctx).Bar(chartData, {	
-										scaleOverlay : false,
-										scaleOverride : true,
-										scaleSteps : maxHeight+2,
-										scaleStepWidth : 1,
-										scaleStartValue : 0
-									});
+									var chart = new Chart(ctx).Pie(chartData);
+									// 	, {	
+									// 	scaleOverlay : false,
+									// 	scaleOverride : true,
+									// 	scaleSteps : maxHeight+2,
+									// 	scaleStepWidth : 1,
+									// 	scaleStartValue : 0
+									// });
 								}
 							}
 						}
@@ -165,11 +216,6 @@ else
 	});
 </script>
 
-<style>
-	#survey-results-container canvas{
-		background-color:white;
-	}
-</style>
 
 <img src="bdlogo.png" height="90px" width="250px"> 
 

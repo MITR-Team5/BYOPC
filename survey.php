@@ -61,6 +61,40 @@ else
 
 		</div>
 
+		<div id="page3">
+
+			<h2>If you currently own a laptop, please answer the following questions</h2>
+
+			<form id="form4">
+				<p>
+				<select name="compBrand">
+					<option value="1">Acer</option>
+					<option value="2">Alienware</option>
+					<option value="3">Apple</option>
+					<option value="4">Asus</option>
+					<option value="5">Dell</option>
+					<option value="6">HP</option>
+					<option value="7">Lenovo</option>
+					<option value="8">Samsung</option>
+					<option value="9">Toshiba</option>
+					<option value="10">Other</option>
+				</select>
+			</form>
+
+			<form id="form5">
+				<p>What Operating System are you currently running on your laptop?</p>
+				<select name="compOS">
+					<option value="1">Windows 8</option>
+					<option value="2">Windows 7</option>
+					<option value="3">Windows Vista</option>
+					<option value="4">Windows XP</option>
+					<option value="5">Mac OSx</option>
+					<option value="6">Linux</option>
+				</select>
+			</form>
+
+		</div>
+
 		<div id= "pageEnd">
 			<h2>Thank you for completing the survey! </h2>
 		</div>
