@@ -116,13 +116,13 @@ else
         										label: "Yes"
 										    }
 										];
-									//var maxHeight=Math.max(result[1], result[0]);
+
 									var desc=GetDescription(allQuestions, qid);
 									$("#survey-results-container").append("<p>Result for question ID "+qid+": "+desc+"</p><canvas width='400' height='400'></canvas>");
 									var canvas=$("#survey-results-container canvas").last().get(0);
 									var ctx = canvas.getContext("2d");
 									var chart = new Chart(ctx).Pie(chartData);
-									
+
 								}
 								for(var i=0; i!=data["data"]["numeric"].length; i++)
 								{
