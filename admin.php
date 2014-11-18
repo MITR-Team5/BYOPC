@@ -78,15 +78,6 @@ else
 									var qid=data["data"]["yesno"][i]["id"];
 									var result=data["data"]["yesno"][i]["result"];
 									var chartData=
-									// {
-									//     labels : ["Yes", "No"],
-									//     datasets : [
-								 //    	    {
-									// 		    fillColor : "rgba(225,79,1,1)",
-									// 		    strokeColor : "rgba(220,220,220,1)",
-									// 		    data : [result[1], result[0]]
-									// 	    }
-									//     ]
 									    [
 									    	{
 										    	value: result[0],
@@ -101,20 +92,12 @@ else
         										label: "Yes"
 										    }
 										];
-									//}
-									//var maxHeight=Math.max(result[1], result[0]);
 									var desc=GetDescription(allQuestions, qid);
 									$("#survey-results-container").append("<p>Result for question ID "+qid+": "+desc+"</p><canvas width='400' height='400'></canvas>");
 									var canvas=$("#survey-results-container canvas").last().get(0);
 									var ctx = canvas.getContext("2d");
 									var chart = new Chart(ctx).Pie(chartData);
-									// , {	
-									// 	scaleOverlay : false,
-									// 	scaleOverride : true,
-									// 	scaleSteps : maxHeight+2,
-									// 	scaleStepWidth : 1,
-									// 	scaleStartValue : 0
-									// });
+
 								}
 								for(var i=0; i!=data["data"]["numeric"].length; i++)
 								{
