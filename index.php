@@ -25,7 +25,6 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"]=="admin")
 		?>
 		</div>
 	</html>
-	<!-- echo "Admin logged in!"; -->
 
 <?php	
 }
@@ -41,10 +40,6 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"]=="normal")
 		?>
 		</div>
 	</html>
-<!-- 	echo "User logged in!"; -->
-
-	
-
 <?php } ?>
 
 <!doctype html>

@@ -14,30 +14,29 @@ $(document).ready(
 function nextpage() {
 	$("#intro").hide();
 	$("#page1").show("slow");
-
 }
 function nextpage2() {
 	$("#page1").hide();
 	$("#page2").show("slow");
 	var form0 = $("#form0 input[type='radio']:checked").val();
 	//alert(form0);
-  $.post("service.php",
-  {
-  	action:"submit_survey",
-  	questions:[
-  	           {
-		  		 qid:1,
-		  	     value:form0
-		  	   }
-  	          ]
-    
-  },
-  function(data,status){
-	  if(data["errors"].length!==0)
+	  $.post("service.php",
 	  {
-		  alert("Submission failed: "+data["msg"]+data["errors"][0]);
-	  }
-  }, "json");
+	  	action:"submit_survey",
+	  	questions:[
+	  	           {
+			  		 qid:1,
+			  	     value:form0
+			  	   }
+	  	          ]
+	    
+	  },
+	  function(data,status){
+		  if(data["errors"].length!==0)
+		  {
+			  alert("Submission failed: "+data["msg"]+data["errors"][0]);
+		  }
+	  }, "json");
 }
 
 function submit() {
@@ -100,6 +99,17 @@ function submit() {
 		  alert("Submit failed: "+data["msg"]);
 	  }
   }, "json");
+   $.post("service.php", 
+  {
+	   action:"complete_survey",
+  },
+  function(data, status){
+	  if(data["errors"].length!==0)
+      {
+		  alert("Failure: "+data["msg"]);
+	  }
+  }
+   );
 
    $("#page2").hide();
    $("#pageEnd").show("slow");
