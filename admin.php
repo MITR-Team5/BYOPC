@@ -17,32 +17,56 @@ else
 	<title>BYO-PC @ BD
 	</title>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="survey.js"></script>
-	<script src="Chart.js"></script>
-	<link rel="stylesheet" type="text/css" href="admin.css">
+	<script src="javascript/survey.js"></script>
+	<script src="javascript/Chart.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/admin.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
 
 </head>
 
-<!-- Chart -->
-<script src="Chart.js"></script>
 <script>
 	$(document).ready(function(){
 		$.ajax({
-			url:"controller.php",
+			url:"service.php",
 			type:"POST",
 			data:{"action":"get_users"},
 			dataType:"json",
 			success:function(data, textStatus, jqXHR){
 				if(data["errors"].length==0)
 				{
-					for(var i=0; i!=data["data"].length; i++)
+					for(var i=0; i!=data["data"]["participate"].length; i++)
 					{
+						var user=data["data"]["participate"][i];
 						var row="<tr>";
-						row+="<td><a href='#'" + data["data"][i]["username"]+"></a></td>";
-						row+="<td>"+data["data"][i]["role"]+"</td>";
+						row+="<td>"+user["username"]+"</td>";
+						row+="<td>"+user["model"]+"</td>";
+						row+="<td>"+user["os"]+"</td>";
+						row+="<td>"+user["comment"]+"</td>";
+						row+="<td>"+(user["completed"]==1 ? "Yes":"No")+"</td>";
 						row+="</tr>";
-						$("#users-table").append(row);
+						$("#users-table-participate").append(row);
+					}
+					for(var i=0; i!=data["data"]["decline"].length; i++)
+					{
+						var user=data["data"]["decline"][i];
+						var row="<tr>";
+						row+="<td>"+user["username"]+"</td>";
+						row+="<td>"+user["comment"]+"</td>";
+						row+="<td>"+(user["completed"]==1 ? "Yes":"No")+"</td>";
+						row+="</tr>";
+						$("#users-table-decline").append(row);
+					}
+					for(var i=0; i!=data["data"]["undecided"].length; i++)
+					{
+						var user=data["data"]["undecided"][i];
+						var row="<tr>";
+						row+="<td>"+user["username"]+"</td>";
+						row+="<td>"+user["model"]+"</td>";
+						row+="<td>"+user["os"]+"</td>";
+						row+="<td>"+user["comment"]+"</td>";
+						row+="<td>"+(user["completed"]==1?"Yes":"No")+"</td>";
+						row+="</tr>";
+						$("#users-table-undecided").append(row);
 					}
 				}
 				else
@@ -56,7 +80,7 @@ else
 		});
 		//Get all survey results
 		$.ajax({
-			url:"controller.php",
+			url:"service.php",
 			type:"POST",
 			data:{"action":"all_survey_results"},
 			dataType:"json",
@@ -65,7 +89,7 @@ else
 				{
 					//Get all survey questions
 					$.ajax({
-						url:"controller.php",
+						url:"service.php",
 						type:"POST",
 						data:{"action":"survey_questions"},
 						dataType:"json",
@@ -78,15 +102,6 @@ else
 									var qid=data["data"]["yesno"][i]["id"];
 									var result=data["data"]["yesno"][i]["result"];
 									var chartData=
-									// {
-									//     labels : ["Yes", "No"],
-									//     datasets : [
-								 //    	    {
-									// 		    fillColor : "rgba(225,79,1,1)",
-									// 		    strokeColor : "rgba(220,220,220,1)",
-									// 		    data : [result[1], result[0]]
-									// 	    }
-									//     ]
 									    [
 									    	{
 										    	value: result[0],
@@ -101,36 +116,20 @@ else
         										label: "Yes"
 										    }
 										];
-									//}
 									//var maxHeight=Math.max(result[1], result[0]);
 									var desc=GetDescription(allQuestions, qid);
 									$("#survey-results-container").append("<p>Result for question ID "+qid+": "+desc+"</p><canvas width='400' height='400'></canvas>");
 									var canvas=$("#survey-results-container canvas").last().get(0);
 									var ctx = canvas.getContext("2d");
 									var chart = new Chart(ctx).Pie(chartData);
-									// , {	
-									// 	scaleOverlay : false,
-									// 	scaleOverride : true,
-									// 	scaleSteps : maxHeight+2,
-									// 	scaleStepWidth : 1,
-									// 	scaleStartValue : 0
-									// });
+									
 								}
 								for(var i=0; i!=data["data"]["numeric"].length; i++)
 								{
 									var qid=data["data"]["numeric"][i]["id"];
 									var result=data["data"]["numeric"][i]["result"];
 									var chartData=
-									// {
-									//     labels : ["1", "2", "3", "4", "5"],
-									//     datasets : [
-								 //    	    {
-									// 		    fillColor : "rgba(225,79,1,1)",
-									// 		    strokeColor : "rgba(220,220,220,1)",
-									// 		    data : [result["1"], result["2"], result["3"], result["4"], result["5"]]
-									// 	    }
-									//     ]
-									// };
+									
 									[
 										{
 											value: result["1"],
@@ -164,7 +163,9 @@ else
 											label: "5"
 										}
 									]
-									var maxHeight=Math.max(result["1"], result["2"], result["3"], result["4"], result["5"]);
+									
+									//var maxHeight=Math.max(result["1"], result["2"], result["3"], result["4"], result["5"]);
+									var desc=GetDescription(allQuestions, qid);
 									$("#survey-results-container").append("<p>Result for question ID "+qid+": "+desc+"</p><canvas width='400' height='400'></canvas>");
 									var canvas=$("#survey-results-container canvas").last().get(0);
 									var ctx = canvas.getContext("2d");
