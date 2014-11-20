@@ -36,6 +36,11 @@ else
 	    <h2>The following surveys will be used to gauge your personal interest in and eligibility to participate in the program.</h2>
 	    <input id = "nextPage" type="button" value="Continue" /> 
 	    </div>
+	    
+	    <div id= "page0">
+	    <form>Would you like to pay for your work laptop out of your own pocket?&nbsp;&nbsp;&nbsp;Yes<input id="yes1" type="radio" name="yes" value="1">&nbsp;&nbsp;No<input id = "no1" type="radio" name="no" value="0"></form>
+	    <input id = "nextPage2" type="button" value="Continue" /> 
+	    </div>
 
 	    <div id= "page1">
 	    <h2> BD is hoping to cut costs by making employees pay for their own laptops. </h2>
@@ -55,8 +60,34 @@ else
 		    <p>I would like to bring my personal laptop into the office &nbsp;&nbsp;&nbsp;Yes<input type="radio" name="yes" value="1">&nbsp;&nbsp;No<input type="radio" name="no" value="0"></p>
 		  </form>
 
+<<<<<<< HEAD
+=======
+			<input id = "submitButton" type="button" value="Submit" /> 
+>>>>>>> 70523df4fc46dbf53ae99f59164d0ce481f4b1ee
 			<input id = "nextPage3" type="button" value="Continue" /> 
 
+		</div>
+		
+		<div id="page3">
+			<form>
+				<p>What's the model of your laptop?(If Other please specify)</p>
+				<select id="model" name="model">
+					<option value="ThinkPad 420">ThinkPad 420</option>
+					<option value="DELL E7440">DELL E7440</option>
+					<option value="DELL E7240">DELL E7240</option>
+					<option value="HP Elitebook 840">HP Elitebook 840</option>
+					<option value="Other"></option>
+				</select>
+				<input id="modelOther" type="text" />
+				<p>What's the operating system that runs on your laptop?</p>
+				<select id="os" name="os">
+					<option value="Windows7">Windows7</option>
+					<option value="Windows8">Windows8</option>
+					<option value="MacOs">MacOs</option>
+					<option value="Linux">Linux</option>
+				</select>
+				<p>Do you want to participate in the program?</p>&nbsp;&nbsp;&nbsp;Yes<input type="radio" name="yes" value="1">&nbsp;&nbsp;No<input type="radio" name="no" value="0">
+			</form>
 		</div>
 
 		<div id="page3">

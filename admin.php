@@ -27,7 +27,6 @@ else
 
 
 
-
 <img src="bdlogo.png" height="90px" width="250px"> 
 
 <button id = "logoutButton" value = "Logout">Logout</button>
