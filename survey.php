@@ -39,18 +39,18 @@ else
 	    <input id = "nextPage" type="button" value="Continue" /> 
 	    </div>
 	    
-	    <div id= "page0">
+	    <div id= "page1">
 	    <form>Would you like to pay for your work laptop out of your own pocket?&nbsp;&nbsp;&nbsp;Yes<input id="yes1" type="radio" name="yes" value="1">&nbsp;&nbsp;No<input id = "no1" type="radio" name="no" value="0"></form>
 	    <input id = "nextPage2" type="button" value="Continue" /> 
 	    </div>
 
-	    <div id= "page1">
+	    <div id= "page2">
 	    <h2> BD is hoping to cut costs by making employees pay for their own laptops. </h2>
 	    <form id="form0">Would you like to pay for your work laptop out of your own pocket?&nbsp;&nbsp;&nbsp;Yes<input id="yes1" type="radio" name="yes" value="1">&nbsp;&nbsp;No<input id = "no1" type="radio" name="no" value="0"></form>
 	    <input id = "nextPage2" type="button" value="Continue" /> 
 	    </div>
 
-		<div id="page2">
+		<div id="page3">
 
 		  <form id="form1">
 		    <p>I am satisfied with my current BD issued laptop&nbsp;&nbsp;&nbsp;1<input type="radio" name="rating" value="1">2<input type="radio" name="rating" value="2">3<input type="radio" name="rating" value="3">4<input type="radio" name="rating" value="4">5<input type="radio" name="rating" value="5"></p>
@@ -67,7 +67,7 @@ else
 
 		</div>
 		
-		<div id="page3">
+		<div id="page4">
 			<form>
 				<p>What's the model of your laptop?(If Other please specify)</p>
 				<select id="model" name="model">
@@ -89,7 +89,7 @@ else
 			</form>
 		</div>
 
-		<div id="page3">
+		<div id="page5">
 
 			<h2>If you currently own a laptop, please answer the following questions</h2>
 
