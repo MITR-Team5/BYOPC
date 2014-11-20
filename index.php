@@ -10,7 +10,7 @@ if(!isset($_SESSION["user"]))
 		?>
 		</div>
 	</html>
-	<!-- echo "User not logged in!"; -->
+
 <?php
 }
 
@@ -40,6 +40,8 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"]=="normal")
 		?>
 		</div>
 	</html>
+
+
 <?php } ?>
 
 <!doctype html>
