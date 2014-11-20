@@ -16,7 +16,6 @@ $(document).ready(
  });
 
 function nextpage() {
-<<<<<<< HEAD
   $("#intro").hide();
   $("#page1").show("slow");
 
@@ -43,10 +42,11 @@ function nextpage2() {
       alert("Submission failed: "+data["msg"]+data["errors"][0]);
     }
   }, "json");
-=======
+
 	$("#intro").hide();
 	$("#page1").show("slow");
 }
+
 function nextpage2() {
 	$("#page1").hide();
 	$("#page2").show("slow");
@@ -69,7 +69,7 @@ function nextpage2() {
 			  alert("Submission failed: "+data["msg"]+data["errors"][0]);
 		  }
 	  }, "json");
->>>>>>> 70523df4fc46dbf53ae99f59164d0ce481f4b1ee
+
 }
 
 function nextpage3() {

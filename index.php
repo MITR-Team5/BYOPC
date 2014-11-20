@@ -40,12 +40,8 @@ if(isset($_SESSION["user"]) && $_SESSION["user"]["role"]=="normal")
 		?>
 		</div>
 	</html>
-<<<<<<< HEAD
 
-	
 
-=======
->>>>>>> 70523df4fc46dbf53ae99f59164d0ce481f4b1ee
 <?php } ?>
 
 <!doctype html>
