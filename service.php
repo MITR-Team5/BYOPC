@@ -487,26 +487,35 @@ else if(ReceiveCommand("get_users")) // expects SESSION{user:{role}} returns: {"
 		try
 		{
 			$db->beginTransaction();
-			$users=["participate"=>[], "decline"=>[], "undecided"=>[]];
-			
-			$query="SELECT * FROM `users` WHERE `participate`=1";
+	
+			$query="SELECT * FROM `users`";
 			$stmt=$db->prepare($query);
 			$stmt->execute();
-			$users["participate"]=$stmt->fetchAll();
-			
-			$query="SELECT * FROM `users` WHERE `participate`=0";
-			$stmt=$db->prepare($query);
-			$stmt->execute();
-			$users["decline"]=$stmt->fetchAll();
-			
-			$query="SELECT * FROM `users` WHERE `participate`=-1";
-			$stmt=$db->prepare($query);
-			$stmt->execute();
-			$users["undecided"]=$stmt->fetchAll();
-			
 			$db->commit();
 				
-			$ret["data"]=$users;
+			$allUsers=$stmt->fetchAll();
+			$ret["data"]=$allUsers;
+			// $db->beginTransaction();
+			// $users=["participate"=>[], "decline"=>[], "undecided"=>[]];
+			
+			// $query="SELECT * FROM `users` WHERE `participate`=1";
+			// $stmt=$db->prepare($query);
+			// $stmt->execute();
+			// $users["participate"]=$stmt->fetchAll();
+			
+			// $query="SELECT * FROM `users` WHERE `participate`=0";
+			// $stmt=$db->prepare($query);
+			// $stmt->execute();
+			// $users["decline"]=$stmt->fetchAll();
+			
+			// $query="SELECT * FROM `users` WHERE `participate`=-1";
+			// $stmt=$db->prepare($query);
+			// $stmt->execute();
+			// $users["undecided"]=$stmt->fetchAll();
+			
+			// $db->commit();
+				
+			// $ret["data"]=$users;
 		}
 		catch(PDOException $ex)
 		{
