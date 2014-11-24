@@ -259,38 +259,46 @@ else if(ReceiveCommand("submit_survey")) // expects SESSION {user: {id}} POST{qu
 	{
 		try
 		{
-			
 			$db->beginTransaction();
-			
-			
 			$dupAnswer=false;
 			$surveyQuestions=$_POST["questions"];
-			foreach($surveyQuestions as $q)
+			try
 			{
-				$qid=$q["qid"];
-				
-				$query="SELECT * FROM `survey_results` WHERE `userid`=:userid AND `surveyid`=:surveyid";
-				$stmt=$db->prepare($query);
-				$stmt->execute([":userid"=>$_SESSION["user"]["id"], ":surveyid"=>$qid]);
-				if($stmt->fetch()==true)
+				foreach($surveyQuestions as $q)
 				{
-					$dupAnswer=true;
-					$ret["msg"].="You have already answered question $qid\n";
-					array_push($ret["errors"], "ResubmittingAnswer");
-				}
-				else 
-				{
-					$value=$q["value"];
-					$query="INSERT INTO `survey_results`(`userid`, `surveyid`, `value`) VALUES (:userid, :surveyid, :value)";
+					$qid=$q["qid"];
+					
+					$query="SELECT * FROM `survey_results` WHERE `userid`=:userid AND `surveyid`=:surveyid";
 					$stmt=$db->prepare($query);
-					$stmt->execute([":userid"=>$_SESSION["user"]["id"], ":surveyid"=>$qid, ":value"=>$value]);
+					$stmt->execute([":userid"=>$_SESSION["user"]["id"], ":surveyid"=>$qid]);
+					if($stmt->fetch()==true)
+					{
+						$dupAnswer=true;
+						$ret["msg"].="You have already answered question $qid, not overwriting\n";
+					}
+					else 
+					{
+						
+						$value=$q["value"];
+						$query="INSERT INTO `survey_results`(`userid`, `surveyid`, `value`) VALUES (:userid, :surveyid, :value)";
+						$stmt=$db->prepare($query);
+						$stmt->execute([":userid"=>$_SESSION["user"]["id"], ":surveyid"=>$qid, ":value"=>$value]);
+					}
+					
+				}
+				$db->commit();
+				if(!$dupAnswer)
+				{
+					$ret["msg"]="Survey has been successfully submitted";
 				}
 			}
-			$db->commit();
-			if(!$dupAnswer)
+			catch(PDOException $ex)
 			{
-				$ret["msg"]="Survey has been successfully submitted";
+				$db->rollBack();
+				array_push($ret["errors"], $ex->getMessage());
+				$ret["msg"]="Declination failed due to an internal issue";
 			}
+			
 			
 		}
 		catch(PDOException $ex)

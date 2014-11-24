@@ -38,102 +38,81 @@ else
 	    </div>
 	    
 	    <div id= "page1">
-	    <form>Would you like to pay for your work laptop out of your own pocket?&nbsp;&nbsp;&nbsp;Yes<input id="yes1" type="radio" name="yes" value="1">&nbsp;&nbsp;No<input id = "no1" type="radio" name="no" value="0"></form>
+	    <form id= "form1">Would you like to pay for your work laptop out of your own pocket?&nbsp;&nbsp;&nbsp;Yes<input id="yes1" type="radio" name="yes" value="1">&nbsp;&nbsp;No<input id = "no1" type="radio" name="no" value="0"></form>
 	    <input id = "nextPage2" type="button" value="Continue" /> 
 	    </div>
 
 	    <div id= "page2">
 	    <h2> BD is hoping to cut costs by making employees pay for their own laptops. </h2>
-	    <form id="form0"><h3>Would you like to pay for your work laptop out of your own pocket?</h3>&nbsp;&nbsp;&nbsp;Yes<input id="yes1" type="radio" name="yes" value="1">&nbsp;&nbsp;No<input id = "no1" type="radio" name="no" value="0"></form>
-	    <p><input id = "nextPage2" type="button" value="Continue"/> </p>
+	    <form id="form2"><h3>Would you like to pay for your work laptop out of your own pocket?</h3>&nbsp;&nbsp;&nbsp;Yes<input id="yes1" type="radio" name="yes" value="1">&nbsp;&nbsp;No<input id = "no1" type="radio" name="no" value="0"></form>
+	    <input id = "nextPage3" type="button" value="Continue"/>
 	    </div>
 
 		<div id="page3">
 
-		  <form id="form1">
+		  <form id="form31">
 		    <p>I am satisfied with my current BD issued laptop&nbsp;&nbsp;&nbsp;1<input type="radio" name="rating" value="1">2<input type="radio" name="rating" value="2">3<input type="radio" name="rating" value="3">4<input type="radio" name="rating" value="4">5<input type="radio" name="rating" value="5"></p>
 		  </form>
-		  <form id="form2">
+		  <form id="form32">
 		    <p>I currently own a personal laptop&nbsp;&nbsp;&nbsp;Yes<input type="radio" name="yes" value="1">&nbsp;&nbsp;No<input type="radio" name="no" value="0"></p>
 		  </form>
-		  <form id="form3">
+		  <form id="form33">
 		    <p>I would like to bring my personal laptop into the office &nbsp;&nbsp;&nbsp;Yes<input type="radio" name="yes" value="1">&nbsp;&nbsp;No<input type="radio" name="no" value="0"></p>
 		  </form>
-
-<<<<<<< HEAD
-=======
-			<input id = "submitButton" type="button" value="Submit" /> 
->>>>>>> 70523df4fc46dbf53ae99f59164d0ce481f4b1ee
-			<input id = "nextPage3" type="button" value="Continue" /> 
+		  <input id = "nextPage4" type="button" value="Continue" />
 
 		</div>
 		
-		<div id="page4">
-			<form>
-				<p>What's the model of your laptop?(If Other please specify)</p>
-				<select id="model" name="model">
-					<option value="ThinkPad 420">ThinkPad 420</option>
-					<option value="DELL E7440">DELL E7440</option>
-					<option value="DELL E7240">DELL E7240</option>
-					<option value="HP Elitebook 840">HP Elitebook 840</option>
-					<option value="Other"></option>
-				</select>
-				<input id="modelOther" type="text" />
-				<p>What's the operating system that runs on your laptop?</p>
-				<select id="os" name="os">
-					<option value="Windows7">Windows7</option>
-					<option value="Windows8">Windows8</option>
-					<option value="MacOs">MacOs</option>
-					<option value="Linux">Linux</option>
-				</select>
-				<p>Do you want to participate in the program?</p>&nbsp;&nbsp;&nbsp;Yes<input type="radio" name="yes" value="1">&nbsp;&nbsp;No<input type="radio" name="no" value="0">
-			</form>
-		</div>
+		
 
-		<div id="page5">
+		<div id="page4">
 
 			<h2>If you currently own a laptop, please answer the following questions</h2>
 
-			<form id="form4">
+			<form id="form41">
 				<p>What is the make of your laptop?
 				<select name="compBrand">
-					<option value="1">Acer</option>
-					<option value="2">Apple</option>
-					<option value="3">Asus</option>
-					<option value="4">Dell</option>
-					<option value="5">HP</option>
-					<option value="6">Lenovo</option>
-					<option value="7">Samsung</option>
-					<option value="8">Toshiba</option>
-					<option value="9">Other</option>
+					<option value="Acer">Acer</option>
+					<option value="Apple">Apple</option>
+					<option value="Asus">Asus</option>
+					<option value="Dell">Dell</option>
+					<option value="HP">HP</option>
+					<option value="Lenovo">Lenovo</option>
+					<option value="Samsung">Samsung</option>
+					<option value="Toshiba">Toshiba</option>
+					<option value="Other">Other</option>
 				</select>
 				</p>
 			</form>
 
-			<form id="form5">
+			<form id="form42">
 				<p>What Operating System are you currently running on your laptop?
 				<select name="compOS">
-					<option value="1">Windows 8</option>
-					<option value="2">Windows 7</option>
-					<option value="3">Windows Vista</option>
-					<option value="4">Windows XP</option>
-					<option value="5">Mac OSx</option>
-					<option value="6">Linux</option>
+					<option value="Windows8">Windows 8</option>
+					<option value="Windows7">Windows 7</option>
+					<option value="WindowsVista">Windows Vista</option>
+					<option value="WindowsXP">Windows XP</option>
+					<option value="MacOSX">Mac OSx</option>
+					<option value="Linux">Linux</option>
+					<option value="Other">Other</option>
 				</select>
 				</p>
 			</form>
-
-			<input id = "nextPage4" type="button" value="Continue" /> 
+			
+			<form id="form43">
+			    <h3>I wish to participate in the BYO-PC program</h3>  
+			    <p>Yes<input type="radio" name="yes" value="1">&nbsp;&nbsp;No<input type="radio" name="no" value="0"></p>
+		  	</form>
+		  	
+		  	<form id="form44">
+		  		<h3>Comment</h3>
+		  		<textarea rows="4" cols="30"></textarea>
+		  	</form>
+			<input id = "nextPage5" type="button" value="Continue" /> 
 
 		</div>
 
-		<div id= "page4">
-		  <form id="form6">
-		    <h3>I wish to participate in the BYO-PC program</h3>  
-		    <p>Yes<input type="radio" name="yes" value="1">&nbsp;&nbsp;No<input type="radio" name="no" value="0"></p>
-		  </form>
-		  <input id = "submitButton" type="button" value="Submit" /> 
-		</div>
+		
 
 		<div id= "pageEnd">
 			<h2>Thank you for completing the survey! </h2>
