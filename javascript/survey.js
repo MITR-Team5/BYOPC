@@ -129,7 +129,7 @@ function nextpage2() {
 	var form0 = $("#form0 input[type='radio']:checked").val();
 	//alert(form0);
 	  $.post("service.php",
-=======
+	  
 (function($){
 	$(document).ready(function(){
 		//get all the questions
