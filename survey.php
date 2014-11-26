@@ -21,6 +21,7 @@ else
 	</title>
 	<link rel="stylesheet" type="text/css" href="css/survey.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+
 </head>
 
 	<img src="bdlogo.png" height="90px" width="250px"> 
@@ -36,16 +37,11 @@ else
 	    <h2>The following surveys will be used to gauge your personal interest in and eligibility to participate in the program.</h2>
 	    <input id = "nextPage" type="button" value="Continue" /> 
 	    </div>
-	    
-	    <div id= "page0">
-	    <form>Would you like to pay for your work laptop out of your own pocket?&nbsp;&nbsp;&nbsp;Yes<input id="yes1" type="radio" name="yes" value="1">&nbsp;&nbsp;No<input id = "no1" type="radio" name="no" value="0"></form>
-	    <input id = "nextPage2" type="button" value="Continue" /> 
-	    </div>
 
 	    <div id= "page1">
 	    <h2> BD is hoping to cut costs by making employees pay for their own laptops. </h2>
 	    <form id="form0"><h3>Would you like to pay for your work laptop out of your own pocket?</h3>&nbsp;&nbsp;&nbsp;Yes<input id="yes1" type="radio" name="yes" value="1">&nbsp;&nbsp;No<input id = "no1" type="radio" name="no" value="0"></form>
-	    <p><input id = "nextPage2" type="button" value="Continue"/> </p>
+	    <p><input id = "nextPage1" type="button" value="Continue"/> </p>
 	    </div>
 
 		<div id="page2">
@@ -60,15 +56,14 @@ else
 		    <p>I would like to bring my personal laptop into the office &nbsp;&nbsp;&nbsp;Yes<input type="radio" name="yes" value="1">&nbsp;&nbsp;No<input type="radio" name="no" value="0"></p>
 		  </form>
 
-<<<<<<< HEAD
-=======
-			<input id = "submitButton" type="button" value="Submit" /> 
->>>>>>> 70523df4fc46dbf53ae99f59164d0ce481f4b1ee
-			<input id = "nextPage3" type="button" value="Continue" /> 
+<!-- 
+			<input id = "submitButton" type="button" value="Submit" />  -->
+
+			<input id = "nextPage2" type="button" value="Continue" /> 
 
 		</div>
 		
-		<div id="page3">
+<!-- 		<div id="page3">
 			<form>
 				<p>What's the model of your laptop?(If Other please specify)</p>
 				<select id="model" name="model">
@@ -89,7 +84,7 @@ else
 				<p>Do you want to participate in the program?</p>&nbsp;&nbsp;&nbsp;Yes<input type="radio" name="yes" value="1">&nbsp;&nbsp;No<input type="radio" name="no" value="0">
 			</form>
 		</div>
-
+ -->
 		<div id="page3">
 
 			<h2>If you currently own a laptop, please answer the following questions</h2>
@@ -123,7 +118,7 @@ else
 				</p>
 			</form>
 
-			<input id = "nextPage4" type="button" value="Continue" /> 
+			<input id = "nextPage3" type="button" value="Continue" /> 
 
 		</div>
 

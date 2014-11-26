@@ -1,15 +1,17 @@
 $(document).ready(
     function(){
 
+      //$("#page0").hide();
       $("#page1").hide();
       $("#page2").hide();
       $("#page3").hide();
       $("#page4").hide();
       $("#pageEnd").hide();
       $("#nextPage").click(nextpage);
+      $("#nextPage1").click(nextpage1);
       $("#nextPage2").click(nextpage2);
       $("#nextPage3").click(nextpage3);
-      $("#nextPage4").click(nextpage4);
+      //$("#nextPage4").click(nextpage4);
       $("#submitButton").click(submit);
       $("#logoutButton").click(logout);
 
@@ -20,12 +22,12 @@ function nextpage() {
   $("#page1").show("slow");
 
 }
-function nextpage2() {
+function nextpage1() {
   $("#page1").hide();
   $("#page2").show("slow");
   var form0 = $("#form0 input[type='radio']:checked").val();
   //alert(form0);
-  $.post("controller.php",
+  $.post("service.php",
   {
     action:"submit_survey",
     questions:[
@@ -43,13 +45,13 @@ function nextpage2() {
     }
   }, "json");
 
-	$("#intro").hide();
-	$("#page1").show("slow");
+	// $("#intro").hide();
+	// $("#page1").show("slow");
 }
 
 function nextpage2() {
-	$("#page1").hide();
-	$("#page2").show("slow");
+	$("#page2").hide();
+	$("#page3").show("slow");
 	var form0 = $("#form0 input[type='radio']:checked").val();
 	//alert(form0);
 	  $.post("service.php",
@@ -76,7 +78,7 @@ function nextpage3() {
   var form1 = $("#form1 input[type='radio']:checked").val();
   var form2 = $("#form2 input[type='radio']:checked").val();
   var form3 = $("#form3 input[type='radio']:checked").val();
-  $.post("controller.php",
+  $.post("service.php",
   {
     action:"submit_survey",
     questions:[
@@ -94,7 +96,7 @@ function nextpage3() {
       alert("Submit failed: "+data["msg"]);
     }
   }, "json");
-   $.post("controller.php",
+   $.post("service.php",
   {
     action:"submit_survey",
     questions: [
@@ -112,7 +114,7 @@ function nextpage3() {
       alert("Submit failed: "+data["msg"]);
     }
   }, "json");
-   $.post("controller.php",
+   $.post("service.php",
   {
     action:"submit_survey",
     questions:[
@@ -141,14 +143,10 @@ function nextpage3() {
   }
    );
 
-   $("#page2").hide();
-   $("#page3").show("slow");
+   $("#page3").hide();
+   $("#page4").show("slow");
 }
 
-function nextpage4() {
-  $("#page3").hide();
-  $("#page4").show("slow");
-}
 
 function submit() {
   $("#page4").hide();
@@ -158,7 +156,7 @@ function submit() {
 
 function logout(){
   $.ajax({
-    url:"controller.php",
+    url:"service.php",
     type:"POST",
     data:{"action":"logout"},
     dataType:"json",

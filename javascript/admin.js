@@ -200,7 +200,7 @@ $(document).ready(function(){
 
 					$("#survey-results").hide();
 					$("#view-all").click(surveyShow);
-					
+					$("#logoutButton").click(logout);
 					//setTimeout(function(){ getHeight();},100);
 					
 				}
@@ -227,7 +227,7 @@ $(document).ready(function(){
 			}
 			return "Unknown question";
 		}
-		
+
 		function surveyShow() {
 			$("#view-all").hide();
 			$("#survey-results").show();
@@ -241,4 +241,17 @@ $(document).ready(function(){
 			$("#footer").css("margin-top",$("#footer").outerHeight()+$("#content").outerHeight()+40);
 			$("#bottombar").css("margin-top",$("#bottombar").outerHeight()+$("#content").outerHeight());
 		}
+
+		function logout(){
+		  $.ajax({
+		    url:"service.php",
+		    type:"POST",
+		    data:{"action":"logout"},
+		    dataType:"json",
+		    success:function(data, textStatus, jqXHR){
+		      window.location.assign("index.php");
+		    }
+		  });
+		}
+
 	});
