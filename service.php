@@ -1,6 +1,7 @@
 <?php
 include("dbconnect.php");
 session_start();
+ob_start();
 //For testing
 /////////////////////////////////////
 //  $_POST["action"]="register";
@@ -22,7 +23,7 @@ session_start();
 // $_POST["comment"]="That's too expensive!";
 
 // $_POST["action"]="submit_survey";
-// $_POST["questions"]=[["qid"=>1, "value"=>4, "type"=>"Others"], ["qid"=>2, "value"=>3, "type"=>"Others"], ["qid"=>3, "value"=>2, "type"=>"Others"]];
+// $_POST["questions"]=[["qid"=>1, "value"=>4], ["qid"=>2, "value"=>3], ["qid"=>3, "value"=>2]];
 
 // $_POST["action"]="complete_survey";
 
@@ -247,7 +248,7 @@ else if(ReceiveCommand("decline"))// expects SESSION {user: {id}} POST{comment}
 		$ret["msg"]="Declination failed due to an internal issue";
 	}
 }
-else if(ReceiveCommand("submit_survey")) // expects SESSION {user: {id}} POST{questions: [{"qid", "value", "type"}]}
+else if(ReceiveCommand("submit_survey")) // expects SESSION {user: {id}} POST{questions: [{"qid", "value"}]}
 {
 	$ret["action"]="submit_survey";
 	if(!isset($_SESSION["user"]))
@@ -267,7 +268,7 @@ else if(ReceiveCommand("submit_survey")) // expects SESSION {user: {id}} POST{qu
 				foreach($surveyQuestions as $q)
 				{
 					$qid=$q["qid"];
-					
+					//Check if the user has already answered the same question. If he has, don't overwrite it.
 					$query="SELECT * FROM `survey_results` WHERE `userid`=:userid AND `surveyid`=:surveyid";
 					$stmt=$db->prepare($query);
 					$stmt->execute([":userid"=>$_SESSION["user"]["id"], ":surveyid"=>$qid]);
@@ -346,12 +347,11 @@ else if(ReceiveCommand("survey_questions")) // expects POST{}
 	try 
 	{
 		$db->beginTransaction();
-		$query="SELECT * FROM `survey_questions`";
+		$query="SELECT * FROM `survey_questions` ORDER BY `id`";
 		$stmt=$db->prepare($query);
 		$stmt->execute();
 		$questions=$stmt->fetchAll();
 		$db->commit();
-		
 		$ret["data"]=$questions;
 	}
 	catch(PDOException $ex)
@@ -541,13 +541,26 @@ else if(ReceiveCommand("logout"))
 	session_destroy();
 	$ret["msg"]="You are logged out";
 	
+	
 }
 else 
 {
 	$ret["msg"]="Action not valid";
 }
 
+//Get any error, warning and append them to the error msg
+$extraOutput=ob_get_clean();
+if(strlen($extraOutput)!=0)
+{
+	array_push($ret["errors"], "Unknown errors have occurred. Please contact support team");
+	$ret["msg"]=$extraOutput;
+	
+}
+
+//Send the response
 echo json_encode($ret);
+
+
 
 /////////
 

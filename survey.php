@@ -34,42 +34,21 @@ else
 	    <div id= "intro">
 	    <h2>Due to the success of the BYOD program at BD, we have decided to implement a BYO-PC program.</h2> 
 	    <h2>The following surveys will be used to gauge your personal interest in and eligibility to participate in the program.</h2>
-	    <input id = "nextPage" type="button" value="Continue" /> 
+	    <input class = "nextPage" type="button" value="Continue" /> 
 	    </div>
 	    
 	    <div id= "page1">
-	    <form id= "form1">Would you like to pay for your work laptop out of your own pocket?&nbsp;&nbsp;&nbsp;Yes<input id="yes1" type="radio" name="yes" value="1">&nbsp;&nbsp;No<input id = "no1" type="radio" name="no" value="0"></form>
-	    <input id = "nextPage2" type="button" value="Continue" /> 
+	    	<div id="survey-questions">
+	    		<div id="questions"></div>
+	    	</div>
+	    	<input id="submit-survey-btn" type="button" value="submit" />
 	    </div>
-
-	    <div id= "page2">
-	    <h2> BD is hoping to cut costs by making employees pay for their own laptops. </h2>
-	    <form id="form2"><h3>Would you like to pay for your work laptop out of your own pocket?</h3>&nbsp;&nbsp;&nbsp;Yes<input id="yes1" type="radio" name="yes" value="1">&nbsp;&nbsp;No<input id = "no1" type="radio" name="no" value="0"></form>
-	    <input id = "nextPage3" type="button" value="Continue"/>
-	    </div>
-
-		<div id="page3">
-
-		  <form id="form31">
-		    <p>I am satisfied with my current BD issued laptop&nbsp;&nbsp;&nbsp;1<input type="radio" name="rating" value="1">2<input type="radio" name="rating" value="2">3<input type="radio" name="rating" value="3">4<input type="radio" name="rating" value="4">5<input type="radio" name="rating" value="5"></p>
-		  </form>
-		  <form id="form32">
-		    <p>I currently own a personal laptop&nbsp;&nbsp;&nbsp;Yes<input type="radio" name="yes" value="1">&nbsp;&nbsp;No<input type="radio" name="no" value="0"></p>
-		  </form>
-		  <form id="form33">
-		    <p>I would like to bring my personal laptop into the office &nbsp;&nbsp;&nbsp;Yes<input type="radio" name="yes" value="1">&nbsp;&nbsp;No<input type="radio" name="no" value="0"></p>
-		  </form>
-		  <input id = "nextPage4" type="button" value="Continue" />
-
-		</div>
-		
-		
-
-		<div id="page4">
+	    
+		<div id="page2">
 
 			<h2>If you currently own a laptop, please answer the following questions</h2>
 
-			<form id="form41">
+			<form id="decision">
 				<p>What is the make of your laptop?
 				<select name="compBrand">
 					<option value="Acer">Acer</option>
@@ -83,9 +62,7 @@ else
 					<option value="Other">Other</option>
 				</select>
 				</p>
-			</form>
-
-			<form id="form42">
+				
 				<p>What Operating System are you currently running on your laptop?
 				<select name="compOS">
 					<option value="Windows8">Windows 8</option>
@@ -97,24 +74,20 @@ else
 					<option value="Other">Other</option>
 				</select>
 				</p>
-			</form>
-			
-			<form id="form43">
+				
 			    <h3>I wish to participate in the BYO-PC program</h3>  
-			    <p>Yes<input type="radio" name="yes" value="1">&nbsp;&nbsp;No<input type="radio" name="no" value="0"></p>
-		  	</form>
+			    <p>Yes<input type="radio" name="participate" value="1">&nbsp;&nbsp;No<input type="radio" name="participate" value="0"></p>
 		  	
-		  	<form id="form44">
 		  		<h3>Comment</h3>
-		  		<textarea rows="4" cols="30"></textarea>
+		  		<textarea name="comment" rows="4" cols="30"></textarea>
 		  	</form>
-			<input id = "nextPage5" type="button" value="Continue" /> 
+			<input id = "submit-decision-btn" type="button" value="Submit" /> 
 
 		</div>
 
 		
 
-		<div id= "pageEnd">
+		<div id= "page3">
 			<h2>Thank you for completing the survey! </h2>
 		</div>
 
