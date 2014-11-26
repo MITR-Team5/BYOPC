@@ -142,9 +142,9 @@
 			$.post("service.php",
 			{
 				action:"participate",
-				model:$("#decision input[name='compBrand']").val(),
-				os:$("#decision input[name='compOS']").val(),
-				comment:$("#decision input[name='comment']").val()
+				model:$("#decision select[name='compBrand']").val(),
+				os:$("#decision select[name='compOS']").val(),
+				comment:$("#decision textarea[name='comment']").val()
 			}, 
 			function(data, status){
 				if(data["errors"].length==0)
