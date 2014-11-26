@@ -1,4 +1,8 @@
-$(document).ready(function(){
+(function($){
+	$(document).ready(function(){
+		
+		$("#logoutButton").click(logout);
+		
 		$.ajax({
 			url:"service.php",
 			type:"POST",
@@ -12,7 +16,7 @@ $(document).ready(function(){
 						//alert(data["data"][i]["username"]);
 						var row="<tr>";
 						if(data["data"][i]["role"] != "admin"){
-							row+="<td><a href='user_results.php'>" + data["data"][i]["username"]+"</a></td>";
+							row+="<td><a href=#>" + data["data"][i]["username"]+"</a></td>";
 						}
 						else{
 							row+="<td>"+data["data"][i]["username"]+"</td>";
@@ -115,8 +119,8 @@ $(document).ready(function(){
 										    {
 										    	value: result[1],
 										    	color: "#46BFBD",
-        										highlight: "#5AD3D1",
-        										label: "Yes"
+	    										highlight: "#5AD3D1",
+	    										label: "Yes"
 										    }
 										];
 									//var maxHeight=Math.max(result[1], result[0]);
@@ -165,8 +169,8 @@ $(document).ready(function(){
 										{
 										   	value: result["3"],
 										   	color: "#46BFBD",
-        									highlight: "#5AD3D1",
-        									label: "3"
+	    									highlight: "#5AD3D1",
+	    									label: "3"
 										},
 										{
 											value: result["4"],
@@ -241,7 +245,11 @@ $(document).ready(function(){
 			$("#footer").css("margin-top",$("#footer").outerHeight()+$("#content").outerHeight()+40);
 			$("#bottombar").css("margin-top",$("#bottombar").outerHeight()+$("#content").outerHeight());
 		}
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> ce21de8cbf291c1ed7f63b259b6fc5c5e0d8e313
 		function logout(){
 		  $.ajax({
 		    url:"service.php",
@@ -253,5 +261,11 @@ $(document).ready(function(){
 		    }
 		  });
 		}
+<<<<<<< HEAD
 
 	});
+=======
+			
+	});
+}(jQuery));
+>>>>>>> ce21de8cbf291c1ed7f63b259b6fc5c5e0d8e313
