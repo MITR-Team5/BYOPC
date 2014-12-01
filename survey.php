@@ -41,12 +41,12 @@ else
 	    <input class= "nextPage" type="button" value="Continue" /> 
 	    </div>
 
-	    <div id= "page1">
+	    <div id= "page0">
 	    <h2> The BYOPC program at BD gives employees the option to purchase a laptop for use in the office and at home, or to use a laptop they already own as their work laptop.  </h2>
 	    <form id="form0"><h3>Would you be interested in using a personal laptop for work?</h3>&nbsp;&nbsp;&nbsp;Yes<input id="yes1" type="radio" name="yes" value="1">&nbsp;&nbsp;No<input id = "no1" type="radio" name="no" value="0"></form>
 	    <p><input class = "nextPage" type="button" value="Continue"/> </p>
 	    
- 	    <div id= "page2a">
+ 	    <div id= "page1">
 	    	<div id="survey-questions">
 	    		<div id="questions"></div>
 	    	</div>
@@ -54,7 +54,7 @@ else
 
 	    </div> 
 	    
-		<div id="page2b">
+		<div id="page2">
 
 
 		  <form id="form1">
