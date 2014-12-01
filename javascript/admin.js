@@ -27,6 +27,7 @@
 						row+="<td>"+data["data"][i]["os"]+"</td>";
 						row+="<td>"+data["data"][i]["participate"]+"</td>";
 						row+="<td>"+data["data"][i]["completed"]+"</td>";
+						row+="<td>"+data["data"][i]["comment"]+"</td>";
 						row+="</tr>";
 						$("#users-table").append(row);
 					}

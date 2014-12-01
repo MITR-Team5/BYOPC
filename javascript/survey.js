@@ -101,19 +101,19 @@
 			var qType=q.attr("type");
 			if(qType=="YesNo")
 			{
-				ans.value=q.find("input[type='radio']:checked").val();
+				ans.value=q.find("input[type='radio']:checked").val() || "0";
 			}
 			else if(qType=="Numeric")
 			{
-				ans.value=q.find("input[type='radio']:checked").val();
+				ans.value=q.find("input[type='radio']:checked").val() || "0";
 			}
 			else if(qType=="Text")
 			{
-				ans.value=q.find("input[type='text']").val();
+				ans.value=q.find("input[type='text']").val() || "None";
 			}
 			else
 			{
-				ans.value=q.find("input[type='text']").val();
+				ans.value=q.find("input[type='text']").val() || "0";
 			}
 			answers.push(ans);
 		});
