@@ -14,8 +14,7 @@ else
 }
 ?>
 <head>
-	<title>BYO-PC @ BD
-	</title>
+	<title>BYOPC @ BD</title>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="javascript/admin.js"></script>
 	<script src="javascript/Chart.js"></script>
