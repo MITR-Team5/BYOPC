@@ -1,4 +1,5 @@
 (function($){
+
   $(document).ready(function(){
     //get all the questions
     
@@ -186,6 +187,7 @@
     }
     
   }
+
 
   function complete(){
     $.post("service.php", 
