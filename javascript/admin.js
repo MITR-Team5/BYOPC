@@ -245,11 +245,7 @@
 			$("#footer").css("margin-top",$("#footer").outerHeight()+$("#content").outerHeight()+40);
 			$("#bottombar").css("margin-top",$("#bottombar").outerHeight()+$("#content").outerHeight());
 		}
-<<<<<<< HEAD
 
-=======
-		
->>>>>>> ce21de8cbf291c1ed7f63b259b6fc5c5e0d8e313
 		function logout(){
 		  $.ajax({
 		    url:"service.php",
@@ -261,11 +257,8 @@
 		    }
 		  });
 		}
-<<<<<<< HEAD
 
 	});
-=======
-			
-	});
+
 }(jQuery));
->>>>>>> ce21de8cbf291c1ed7f63b259b6fc5c5e0d8e313
+

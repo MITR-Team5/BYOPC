@@ -33,8 +33,8 @@ else
     <div id="content">
 
 	    <div id= "intro">
-	    <h2>Due to the success of the BYOD program at BD, we have decided to implement a BYOPC program.</h2> 
-	    <h2>"Bring Your Own PC" is a new program offered by BD for employees to choose and use their own computer for work. Similar to BYOD at BD, employees will be able to do basic activities such as checking email, contacts, and calendars and well as do all of their all work related computing using their own computer through the procedures set up by BYOPC. </h2>
+	    <h2>Due to the success of the BYOD program at BD, a BYOPC program has been created.</h2> 
+	    <h2>"Bring Your Own PC" is a new program offered by BD for employees to use their personal computer for work. Employees will be able to accomplish all of their work related computing on their personal computer. </h2>
 	    
 	    <h2>The following surveys will be used to gauge your personal interest in and eligibility to participate in the program.</h2>
 	    <p>&nbsp;</p><p>&nbsp;</p>
@@ -119,7 +119,7 @@ else
 					Your laptop must meet certain performance measures in order for it to be eligible for the program.</h2>
 			    	<h3>I wish to participate in the BYOPC program</h3>  
 			    	<p>Yes<input type="radio" name="participate" value="1">&nbsp;&nbsp;No<input type="radio" name="participate" value="0"></p>
-		  			
+		  			<input type="text" height = "20" width = "30" />
 		  			<input id = "submit-decision-btn" type="button" value="Submit" />
 		  		</div>
 
