@@ -41,12 +41,12 @@ else
 	    <input class= "nextPage" type="button" value="Continue" /> 
 	    </div>
 
-	    <div id= "page0">
+	    <div id= "page1">
 	    <h2> The BYOPC program at BD gives employees the option to purchase a laptop for use in the office and at home, or to use a laptop they already own as their work laptop.  </h2>
-	    <form id="form0"><h3>Would you be interested in using a personal laptop for work?</h3>&nbsp;&nbsp;&nbsp;Yes<input id="yes1" type="radio" name="yes" value="1">&nbsp;&nbsp;No<input id = "no1" type="radio" name="no" value="0"></form>
 	    <p><input class = "nextPage" type="button" value="Continue"/> </p>
+	    </div>
 	    
- 	    <div id= "page1">
+ 	    <div id= "page2">
 	    	<div id="survey-questions">
 	    		<div id="questions"></div>
 	    	</div>
@@ -54,63 +54,8 @@ else
 
 	    </div> 
 	    
-		<div id="page2">
 
-
-		  <form id="form1">
-		    <p>I am satisfied with my current BD issued laptop&nbsp;&nbsp;&nbsp;1<input type="radio" name="rating" value="1">2<input type="radio" name="rating" value="2">3<input type="radio" name="rating" value="3">4<input type="radio" name="rating" value="4">5<input type="radio" name="rating" value="5"></p>
-		  </form>
-		  <form id="form2">
-		    <p>I currently own a personal laptop&nbsp;&nbsp;&nbsp;Yes<input type="radio" name="yes" value="1">&nbsp;&nbsp;No<input type="radio" name="no" value="0"></p>
-		  </form>
-		  <form id="form3">
-		    <p>I would like to bring my personal laptop into the office &nbsp;&nbsp;&nbsp;Yes<input type="radio" name="yes" value="1">&nbsp;&nbsp;No<input type="radio" name="no" value="0"></p>
-		  </form>
-
-			<input class = "nextPage" type="button" value="Continue" /> 
-
-		</div>
-		
-
-		<div id="page3">
-
-			<h2>If you currently own a laptop, please answer the following questions</h2>
-
-			<form id="decision">
-				<p>What is the make of your laptop?
-				<select name="compBrand">
-					<option value="Acer">Acer</option>
-					<option value="Apple">Apple</option>
-					<option value="Asus">Asus</option>
-					<option value="Dell">Dell</option>
-					<option value="HP">HP</option>
-					<option value="Lenovo">Lenovo</option>
-					<option value="Samsung">Samsung</option>
-					<option value="Toshiba">Toshiba</option>
-					<option value="Other">Other</option>
-				</select>
-				</p>
-				
-				<p>What Operating System are you currently running on your laptop?
-				<select name="compOS">
-					<option value="Windows8">Windows 8</option>
-					<option value="Windows7">Windows 7</option>
-					<option value="WindowsVista">Windows Vista</option>
-					<option value="WindowsXP">Windows XP</option>
-					<option value="MacOSX">Mac OSx</option>
-					<option value="Linux">Linux</option>
-					<option value="Other">Other</option>
-				</select>
-				</p>
-
-			</form>
-
-			<input class = "nextPage" type="button" value="Continue" /> 
-		</div>
-
-
-
-		<div id = "page4">
+		<div id = "page3">
 			<h2>In order to ensure maximum security of confidential BD information while allowing for flexibility for employees, a virtual machine "VM" will be used as the work desktop environment.  
 			All information will be saved to a central server located at BD, rather than on the personal computer. 
 			A company ID and password will securely allow users to login and access their virtual machine using the VMWare client installed on the employee computer. 
@@ -119,7 +64,7 @@ else
  			<input class = "nextPage" type="button" value="Continue" /> 
  		</div>
 
- 		<div id = "page5">
+ 		<div id = "page4">
  			<h2>
 			All updates of the work desktop environment will be handled by the IT department / Workplace Engineering team and will follow the same patching schedule as the BD issued laptops.  
  
@@ -132,17 +77,57 @@ else
 			<input class = "nextPage" type="button" value="Continue" /> 
 		</div>
 
-		<div id="page6">
+	<!-- 	<div id="page5"> -->
+			
 
-				<h2>By participating in the BYOPC program, you are agreeing to be responsible for the cost associated with repair and upkeep of your personal laptop. Your laptop must meet certain performance measures in order for it to be eligible for the program.</h2>
-			    <h3>I wish to participate in the BYOPC program</h3>  
-			    <p>Yes<input type="radio" name="participate" value="1">&nbsp;&nbsp;No<input type="radio" name="participate" value="0"></p>
-		  	
-		  	</form>
-			<input id = "submit-decision-btn" type="button" value="Submit" />
-		</div>		
+			<form id="decision">
 
-		<div id= "pageEnd">
+				<div id= "page5">
+					<h2>If you currently own a laptop, please answer the following questions</h2>
+					<p>What is the make of your laptop?
+					<select name="compBrand">
+						<option value="N/A">N/A</option>
+						<option value="Acer">Acer</option>
+						<option value="Apple">Apple</option>
+						<option value="Asus">Asus</option>
+						<option value="Dell">Dell</option>
+						<option value="HP">HP</option>
+						<option value="Lenovo">Lenovo</option>
+						<option value="Samsung">Samsung</option>
+						<option value="Toshiba">Toshiba</option>
+						<option value="Other">Other</option>
+					</select>
+					</p>
+					
+					<p>What Operating System are you currently running on your laptop?
+					<select name="compOS">
+						<option value="N/A">N/A</option>
+						<option value="Windows8">Windows 8</option>
+						<option value="Windows7">Windows 7</option>
+						<option value="WindowsVista">Windows Vista</option>
+						<option value="WindowsXP">Windows XP</option>
+						<option value="MacOSX">Mac OSx</option>
+						<option value="Linux">Linux</option>
+						<option value="Other">Other</option>
+					</select>
+					</p>
+					<input class = "nextPage" type="button" value="Continue" /> 
+				</div>
+
+				<div id="page6">
+					<h2>By participating in the BYOPC program, you are agreeing to be responsible for the cost associated with repair and upkeep of your personal laptop.
+					Your laptop must meet certain performance measures in order for it to be eligible for the program.</h2>
+			    	<h3>I wish to participate in the BYOPC program</h3>  
+			    	<p>Yes<input type="radio" name="participate" value="1">&nbsp;&nbsp;No<input type="radio" name="participate" value="0"></p>
+		  			
+		  			<input id = "submit-decision-btn" type="button" value="Submit" />
+		  		</div>
+
+		
+			</form>
+	<!-- 	</div> -->		
+
+		<div id= "page7">
 			<h2>Thank you for completing the survey! </h2>
 		</div>
 

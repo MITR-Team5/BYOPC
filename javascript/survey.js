@@ -60,14 +60,13 @@
       }
     });
     
-      $("#page0").hide();
       $("#page1").hide();
       $("#page2").hide();
       $("#page3").hide();
       $("#page4").hide();
       $("#page5").hide();
       $("#page6").hide();
-      $("#pageEnd").hide();
+      $("#page7").hide();
         
       $(".nextPage").click(nextpage);
 
