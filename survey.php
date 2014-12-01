@@ -33,27 +33,30 @@ else
     <div id="content">
 
 	    <div id= "intro">
-	    <h2>Due to the success of the BYOD program at BD, a BYOPC program has been created.</h2> 
-	    <h2>"Bring Your Own PC" is a new program offered by BD for employees to use their personal computer for work. Employees will be able to accomplish all of their work related computing on their personal computer. </h2>
+
+	    	<h2>Due to the success of the BYOD program at BD, a BYOPC program has been created.</h2> 
+	    	<h2>"Bring Your Own PC" is a new program offered by BD for employees to use their personal computer for work. Employees will be able to accomplish all of their work related computing on their personal computer. </h2>
 	    
-	    <h2>The following surveys will be used to gauge your personal interest in and eligibility to participate in the program.</h2>
-	    <p>&nbsp;</p><p>&nbsp;</p>
-	    <input class= "nextPage" type="button" value="Continue" /> 
+	    	<h2>The following surveys will be used to gauge your personal interest in and eligibility to participate in the program.</h2>
+	    	<p>&nbsp;</p><p>&nbsp;</p>
+	    	<input class= "nextPage" type="button" value="Continue" /> 
+
 	    </div>
 
 	    <div id= "page1">
-	    <h2> The BYOPC program at BD gives employees the option to purchase a laptop for use in the office and at home, or to use a laptop they already own as their work laptop.  </h2>
-	    <p><input class = "nextPage" type="button" value="Continue"/> </p>
+	    	<h2> The BYOPC program at BD gives employees the option to purchase a laptop for use in the office and at home, or to use a laptop they already own as their work laptop.  </h2>
+	    	<p><input class = "nextPage" type="button" value="Continue"/> </p>
 	    </div>
 	    
  	    <div id= "page2">
 	    	<div id="survey-questions">
 	    		<div id="questions"></div>
 	    	</div>
-	    	<input id="submit-survey-btn" type="button" value="submit" />
+	    	<input id="submit-survey-btn" type="button" value="Continue" /> 
 
 	    </div> 
 	    
+
 
 		<div id = "page3">
 			<h2>In order to ensure maximum security of confidential BD information while allowing for flexibility for employees, a virtual machine "VM" will be used as the work desktop environment.  
@@ -76,6 +79,7 @@ else
 			</h2>
 			<input class = "nextPage" type="button" value="Continue" /> 
 		</div>
+
 
 	<!-- 	<div id="page5"> -->
 			
@@ -119,7 +123,10 @@ else
 					Your laptop must meet certain performance measures in order for it to be eligible for the program.</h2>
 			    	<h3>I wish to participate in the BYOPC program</h3>  
 			    	<p>Yes<input type="radio" name="participate" value="1">&nbsp;&nbsp;No<input type="radio" name="participate" value="0"></p>
-		  			<input type="text" height = "20" width = "30" />
+
+		  			<h3>Comment</h3>
+		  			<textarea name="comment" rows="4" cols="30"></textarea><br />
+
 		  			<input id = "submit-decision-btn" type="button" value="Submit" />
 		  		</div>
 

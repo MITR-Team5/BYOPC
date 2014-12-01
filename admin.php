@@ -47,6 +47,7 @@ else
 			<th>OS</th>
 			<th>Accepted</th>
 			<th>Survey Completed</th>
+			<th>Comment</th>
 		</table>
 <!-- 		<p>Declined users:</p>
 		<table id="users-table-decline">

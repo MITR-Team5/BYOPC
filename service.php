@@ -279,7 +279,6 @@ else if(ReceiveCommand("submit_survey")) // expects SESSION {user: {id}} POST{qu
 					}
 					else 
 					{
-						
 						$value=$q["value"];
 						$query="INSERT INTO `survey_results`(`userid`, `surveyid`, `value`) VALUES (:userid, :surveyid, :value)";
 						$stmt=$db->prepare($query);
@@ -548,7 +547,7 @@ else
 	$ret["msg"]="Action not valid";
 }
 
-//Get any error, warning and append them to the error msg
+//Get any error and warning and append them to the error msg
 $extraOutput=ob_get_clean();
 if(strlen($extraOutput)!=0)
 {

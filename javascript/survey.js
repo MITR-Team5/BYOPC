@@ -73,8 +73,53 @@
       $("#submit-survey-btn").click(SubmitSurvey);
       $("#submit-decision-btn").click(SubmitDecision);
       $("#logoutButton").click(logout);
-
-   });
+	});//Doc ready
+	
+	function SubmitSurvey(){
+		var answers=[];
+		$("#questions div").each(function(i, q){
+			q=$(q);
+			var ans={
+				qid:0,
+				value:0
+			};
+			ans.qid=q.attr("name");
+			var qType=q.attr("type");
+			if(qType=="YesNo")
+			{
+				ans.value=q.find("input[type='radio']:checked").val() || "0";
+			}
+			else if(qType=="Numeric")
+			{
+				ans.value=q.find("input[type='radio']:checked").val() || "0";
+			}
+			else if(qType=="Text")
+			{
+				ans.value=q.find("input[type='text']").val() || "None";
+			}
+			else
+			{
+				ans.value=q.find("input[type='text']").val() || "0";
+			}
+			answers.push(ans);
+		});
+		
+		$.post("service.php", {
+			action:"submit_survey",
+			questions:answers,
+		}, function(data, status){
+			if(data["errors"].length==0)
+			{
+				//Go to the page where user would be asked for his model, os, and decision to participation
+				nextpage();
+			}
+			else
+			{
+				alert(data["msg"]);
+			}
+		}, "json");
+	}
+	
 
   function nextpage() {
     if($("#intro").css("display")!="none")
