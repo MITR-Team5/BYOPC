@@ -212,9 +212,6 @@
 		}
 
 		function getHeight() {
-			//alert($("#middlebar").height());
-			//alert($("#survey-results").outerHeight());
-			//$("#middlebar").height($("#middlebar").height() + $("#bottombar").outerHeight() + $("#content").outerHeight());
 			$("#footer").css("margin-top",$("#footer").outerHeight()+$("#content").outerHeight()+40);
 			$("#bottombar").css("margin-top",$("#bottombar").outerHeight()+$("#content").outerHeight());
 		}

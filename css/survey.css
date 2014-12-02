@@ -34,10 +34,10 @@ body{
   width: 100%;
   left: 0px;
   right: 0px;
-  margin-top: 5px;
+  /*margin-top: 5px;*/
 }
 
-#middlebar{
+/*#middlebar{
   position: absolute;
   background-color:#100b72;
   height: 70%;
@@ -46,28 +46,36 @@ body{
   right: 0px;
   z-index: -1;
   margin-top: 5px;
-}
+}*/
 
 #bottombar{
   position: absolute;
   background-color:#ff4f01;
   height: 20px;
   width: 100%;
-  margin-top:35%;
+  margin-top: 560px;
   left: 0px;
   right: 0px;
 }
 
 #content{
+  position: absolute;
+  background-color:#100b72;
   color: white;
-  margin-top: 10%;
+  margin-top: 20px;
+  padding-top: 8%;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  padding-bottom: 4%;
+  font-family: 'Open Sans', sans-serif;
   text-align: center;
 }
 
 #footer{
   position: relative;
   width: 100%;
-  margin-top: 15%;
+  margin-top: 630px;
   color: #ff4f01;
   text-align: center;
   white-space: nowrap;
@@ -81,6 +89,7 @@ body{
 
 #logoutButton {
   margin-left: 75%;
+  margin-bottom: 5px;
 }
 
 form {

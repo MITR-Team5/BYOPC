@@ -27,8 +27,8 @@ else
 	<img src="bdlogo.png" height="90px" width="250px"> 
 	<button id = "logoutButton">Logout</button>
     <div id="topbar"></div>
-    <div id="middlebar"></div>
-    <div id="bottombar"></div>
+    <!-- <div id="middlebar"></div> -->
+    <!-- <div id="bottombar"></div> -->
 
     <div id="content">
 
@@ -128,6 +128,7 @@ else
 						<option value="Other">Other</option>
 					</select>
 					</p>
+					<p>&nbsp;</p>
 					<input class = "nextPage" type="button" value="Continue" /> 
 				</div>
 
@@ -137,10 +138,10 @@ else
 					<p>&nbsp;</p><p>&nbsp;</p>
 			    	<h3>I wish to participate in the BYOPC program</h3>  
 			    	<p>Yes<input type="radio" name="participate" value="1">&nbsp;&nbsp;No<input type="radio" name="participate" value="0"></p>
-
+			    	<p>&nbsp;</p>
 		  			<h3>Comment</h3>
-		  			<textarea name="comment" rows="4" cols="30"></textarea><br />
-
+		  			<textarea name="comment" rows="4" cols="30"></textarea><br/>
+		  			<p>&nbsp;</p>
 		  			<input id = "submit-decision-btn" type="button" value="Submit" />
 		  		</div>
 
@@ -154,7 +155,7 @@ else
 
 	</div>
 
-
+<div id="bottombar"></div>
 <?php include 'footer.php'; ?>
 
 

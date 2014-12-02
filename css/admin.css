@@ -44,19 +44,8 @@ body{
   width: 100%;
   left: 0px;
   right: 0px;
-/*  margin-top: 5px;*/
 }
 
-/*#middlebar{
-  position: absolute;
-  background-color:#100b72;
-  height: 70%;
-  width: 100%;
-  left: 0px;
-  right: 0px;
-  z-index: -1;
-  margin-top: 5px;
-}*/
 
 #bottombar{
   position: absolute;

@@ -45,7 +45,6 @@
             //You can seperate the question into several pages by modifying this
             $("#questions").append(newQuestion);
             
-              
           }
           
         }
@@ -127,7 +126,7 @@
     if($("#intro").css("display")!="none")
     {
       $("#intro").hide();
-      $("#page1").show("slow");
+      $("#page1").show();
       return;
     }
     var done=false;
@@ -135,12 +134,14 @@
       if(e.id.substr(0, 4)==="page" && !isNaN(e.id.substr(4)) && e.style.display!='none' && !done)
       {
         $(e).hide();
-        $("#page"+((parseInt(e.id.substr(4))+1).toString())).show("slow");
+        $("#page"+((parseInt(e.id.substr(4))+1).toString())).show();
         done=true;
       }
+
     });
 
-    
+    setTimeout(function(){ getHeight(); }, 500);
+    //getHeight();
 
   }
 
@@ -248,6 +249,14 @@
         alert("Failure: "+data["msg"]);
       }
     });
+    setTimeout(function(){ getHeight(); }, 500);
+    //getHeight();
+  }
+
+  function getHeight() {
+    //alert($("#content").outerHeight());
+    $(window).load($("#footer").css("margin-top",$("#footer").outerHeight()+$("#content").outerHeight()+50));
+    $(window).load($("#bottombar").css("margin-top",$("#bottombar").outerHeight()+$("#content").outerHeight()));
   }
 
   function logout(){
