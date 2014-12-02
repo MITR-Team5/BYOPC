@@ -19,7 +19,7 @@
             
             newQuestion.append("<input type='hidden' name='id'></input>");
             newQuestion.find("input[name='id']").val(q["id"]);
-            newQuestion.append("<p>"+q["desc"]+"</p>");
+            newQuestion.append("<h3>"+q["desc"]+"</h3>");
             if(q["type"]=="YesNo")
             {
               newQuestion.append("Yes<input type='radio' value='1' required/>No<input type='radio' value='0' required/>");
@@ -67,6 +67,8 @@
       $("#page5").hide();
       $("#page6").hide();
       $("#page7").hide();
+      $("#page8").hide();
+      $("#page9").hide();
         
       $(".nextPage").click(nextpage);
 
@@ -137,6 +139,8 @@
         done=true;
       }
     });
+
+    
 
   }
 

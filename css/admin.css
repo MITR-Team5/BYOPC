@@ -21,6 +21,22 @@ body{
   text-shadow: black 0.05em 0.05em 0.1em;
 }
 
+#user-content h1{
+  width: 100%;
+  left: 0px;
+  right: 0px;
+  font-weight: 600;
+  position: absolute;
+  z-index: 1;
+  margin-top: 10%;
+  font-size: 2.0em;
+  text-align: center;
+  display: inline;
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  text-shadow: black 0.05em 0.05em 0.1em;
+}
+
 #topbar{
   position: absolute;
   background-color:#ff4f01;
@@ -53,6 +69,19 @@ body{
 }
 
 #content{
+  position: absolute;
+  background-color:#100b72;
+  color: white;
+  margin-top: 20px;
+  padding-top: 8%;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  padding-bottom: 6%;
+
+}
+
+#user-content{
   position: absolute;
   background-color:#100b72;
   color: white;

@@ -5,6 +5,12 @@ body{
 
 }
 
+#content div{
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+}
+
 #content h1{
   width: 100%;
   left: 0px;

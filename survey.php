@@ -34,9 +34,8 @@ else
 
 	    <div id= "intro">
 
-	    	<h2>Due to the success of the BYOD program at BD, a BYOPC program has been created.</h2> 
-	    	<h2>"Bring Your Own PC" is a new program offered by BD for employees to use their personal computer for work. Employees will be able to accomplish all of their work related computing on their personal computer. </h2>
-	    
+	    	<h2>"Bring Your Own PC" is a new program offered by BD for employees who wish to use their personal computer in the workplace. </h2>
+	    	<p>&nbsp;</p>
 	    	<h2>The following surveys will be used to gauge your personal interest in and eligibility to participate in the program.</h2>
 	    	<p>&nbsp;</p><p>&nbsp;</p>
 	    	<input class= "nextPage" type="button" value="Continue" /> 
@@ -45,6 +44,9 @@ else
 
 	    <div id= "page1">
 	    	<h2> The BYOPC program at BD gives employees the option to purchase a laptop for use in the office and at home, or to use a laptop they already own as their work laptop.  </h2>
+	    	<p>&nbsp;</p>
+	    	<h2> Employees will be able to accomplish all of their work related computing on their personal computer. </h2>
+	    	<p>&nbsp;</p><p>&nbsp;</p>
 	    	<p><input class = "nextPage" type="button" value="Continue"/> </p>
 	    </div>
 	    
@@ -52,6 +54,7 @@ else
 	    	<div id="survey-questions">
 	    		<div id="questions"></div>
 	    	</div>
+	    	<p>&nbsp;</p><p>&nbsp;</p>
 	    	<input id="submit-survey-btn" type="button" value="Continue" /> 
 
 	    </div> 
@@ -61,22 +64,32 @@ else
 		<div id = "page3">
 			<h2>In order to ensure maximum security of confidential BD information while allowing for flexibility for employees, a virtual machine "VM" will be used as the work desktop environment.  
 			All information will be saved to a central server located at BD, rather than on the personal computer. 
-			A company ID and password will securely allow users to login and access their virtual machine using the VMWare client installed on the employee computer. 
-			Employees will not be allowed to access programs or confidential information associated with BD on their personal laptop without using the VM. 
- 			</h2>
+			</h2>
+			<p>&nbsp;</p><p>&nbsp;</p>
+			<input class = "nextPage" type="button" value="Continue" /> 
+		</div>
+
+		<div id = "page4">
+			<h2>A company ID and password will securely allow users to login and access their virtual machine using the VMWare client installed on the employee computer. </h2>
+			<h2>Employees will not be allowed to access programs or confidential information associated with BD on their personal laptop without using the VM. </h2>
+ 			<p>&nbsp;</p><p>&nbsp;</p>
  			<input class = "nextPage" type="button" value="Continue" /> 
  		</div>
 
- 		<div id = "page4">
- 			<h2>
-			All updates of the work desktop environment will be handled by the IT department / Workplace Engineering team and will follow the same patching schedule as the BD issued laptops.  
- 
-			Any additional hardware (such as docks, additional chargers, adapters, etc) that are proprietary will be the responsiblity of the employee to purchase. 
-			All employees who choose to enroll in the BYOPC will have access to technical support provided by the Workplace Engineering Team, limited to topics that fall under their jurisdiction.
+ 		<div id = "page5">
+ 			<h2>All employees who choose to enroll in the BYOPC will have access to technical support provided by the Workplace Engineering Team, limited to topics that fall under their jurisdiction. </h2>
+			<h2>All updates of the work desktop environment will be handled by the IT department / Workplace Engineering team and will follow the same patching schedule as the BD issued laptops.  </h2>
+ 			<p>&nbsp;</p><p>&nbsp;</p>
+ 			<input class = "nextPage" type="button" value="Continue" /> 
+ 		</div>
+
+ 		<div id = "page6">
+ 			<h2>Any additional hardware (such as docks, additional chargers, adapters, etc) that are proprietary will be the responsiblity of the employee to purchase. </h2>
+			<h2>
 			Employees who enroll in the program will be entirely responsible for technical support that falls outside the jurisdiction of the Workplace Engineering Team, as well as any costs associated with the maintenance and repair of their personal computer.  
 			To prevent any loss productivity, loaner laptops will be available at the help desk if extensive repairs of the employee's laptop are necessary. 
- 
-			</h2>
+ 			</h2>
+			<p>&nbsp;</p><p>&nbsp;</p>
 			<input class = "nextPage" type="button" value="Continue" /> 
 		</div>
 
@@ -86,7 +99,7 @@ else
 
 			<form id="decision">
 
-				<div id= "page5">
+				<div id= "page7">
 					<h2>If you currently own a laptop, please answer the following questions</h2>
 					<p>What is the make of your laptop?
 					<select name="compBrand">
@@ -118,9 +131,10 @@ else
 					<input class = "nextPage" type="button" value="Continue" /> 
 				</div>
 
-				<div id="page6">
+				<div id="page8">
 					<h2>By participating in the BYOPC program, you are agreeing to be responsible for the cost associated with repair and upkeep of your personal laptop.
 					Your laptop must meet certain performance measures in order for it to be eligible for the program.</h2>
+					<p>&nbsp;</p><p>&nbsp;</p>
 			    	<h3>I wish to participate in the BYOPC program</h3>  
 			    	<p>Yes<input type="radio" name="participate" value="1">&nbsp;&nbsp;No<input type="radio" name="participate" value="0"></p>
 
@@ -134,7 +148,7 @@ else
 			</form>
 	<!-- 	</div> -->		
 
-		<div id= "page7">
+		<div id= "page9">
 			<h2>Thank you for completing the survey! </h2>
 		</div>
 
