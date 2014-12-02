@@ -5,10 +5,10 @@ ob_start();
 //For testing
 /////////////////////////////////////
 //  $_POST["action"]="register";
-//  $_POST["username"]="Kat";
+//  $_POST["username"]="test6";
 //  $_POST["role"]="normal";
-//  $_POST["password"]="crazymonkey";
-//  $_POST["password_again"]="crazymonkey";
+//  $_POST["password"]="";
+//  $_POST["password_again"]="";
 
 // $_POST["action"]="login";
 // $_POST["username"]="mikeogod";
@@ -281,7 +281,7 @@ else if(ReceiveCommand("submit_survey")) // expects SESSION {user: {id}} POST{qu
 					{
 						$value=$q["value"];
 						$query="INSERT INTO `survey_results`(`userid`, `surveyid`, `value`) VALUES (:userid, :surveyid, :value)";
-						$stmt=$db->prepare($query);
+						$stmt=$db->prepare ($query);
 						$stmt->execute([":userid"=>$_SESSION["user"]["id"], ":surveyid"=>$qid, ":value"=>$value]);
 					}
 					
@@ -418,7 +418,7 @@ else if(ReceiveCommand("all_survey_results")) // expects: SESSION {"user":{"role
 			$db->commit();
 			
 			$numberCounts=array_fill(1, 1000, array_fill(1, 5, 0));
-			$boolCounts=array_fill(1, 1000, array(0=>0, 1=>0));
+			$boolCounts=array_fill(1, 1000, [0=>0, 1=>0]);
 			$maxId=0;
 			foreach($rawResult as $record)
 			{
@@ -590,13 +590,6 @@ function validate_password($new_password, $new_password_again, $db, $uid, $mode,
 		//Compare the new_password and new_password_again
 		if($new_password!=$new_password_again)
 		{
-			return false;
-		}
-
-		//Check the length of the new_password_again
-		if(strlen($new_password)<8)
-		{
-			$error_msg="Password is too short (needs to be at least 8 characters long)";
 			return false;
 		}
 

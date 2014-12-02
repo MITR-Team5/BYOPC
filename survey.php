@@ -134,7 +134,7 @@ else
 				<div id="page8">
 					<h2>By participating in the BYOPC program, you are agreeing to be responsible for the cost associated with repair and upkeep of your personal laptop.
 					Your laptop must meet certain performance measures in order for it to be eligible for the program.</h2>
-					<p>&nbsp;</p><p>&nbsp;</p>
+					<p>&nbsp;</p>
 			    	<h3>I wish to participate in the BYOPC program</h3>  
 			    	<p>Yes<input type="radio" name="participate" value="1">&nbsp;&nbsp;No<input type="radio" name="participate" value="0"></p>
 
