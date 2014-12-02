@@ -34,8 +34,8 @@ ob_start();
 
 // $_POST["action"]="all_survey_results";
 
-$_POST["action"]="get_user";
-$_POST["id"]="3";
+// $_POST["action"]="get_user";
+// $_POST["id"]="3";
 
 // $_POST["action"]="get_users";
 
