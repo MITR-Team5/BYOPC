@@ -141,6 +141,12 @@ body{
   text-align: center;
 }
 
+.legend-color{
+	display:inline-block;
+	width:20px;
+	height:15px;
+}
+
 a {
   color: white;
 }

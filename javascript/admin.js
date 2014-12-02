@@ -13,7 +13,6 @@
 				{
 					for(var i=0; i!=data["data"].length; i++)
 					{
-						//alert(data["data"][i]["username"]);
 						var row="<tr>";
 						if(data["data"][i]["role"] != "admin"){
 							row+="<td class='userlink'><a href=#>" + data["data"][i]["username"]+"</a></td>";
@@ -21,50 +20,37 @@
 						else{
 							row+="<td>"+data["data"][i]["username"]+"</td>";
 						}
-						//row+="<td><a href='#'>" + data["data"][i]["username"]+"</a></td>";
 						row+="<td>"+data["data"][i]["role"]+"</td>";
 						row+="<td>"+data["data"][i]["model"]+"</td>";
 						row+="<td>"+data["data"][i]["os"]+"</td>";
-						row+="<td>"+data["data"][i]["participate"]+"</td>";
-						row+="<td>"+data["data"][i]["completed"]+"</td>";
-						row+="<td>"+data["data"][i]["comment"]+"</td>";
+						var participate;
+						if(data["data"][i]["participate"]=="1")
+						{
+							participate="Yes";
+						}
+						else if(data["data"][i]["participate"]=="0")
+						{
+							participate="No";
+						}
+						else
+						{
+							participate="Undecided";
+						}
+						row+="<td>"+participate+"</td>";
+						var completed;
+						if(data["data"][i]["completed"]=="1")
+						{
+							completed="Yes";
+						}
+						else
+						{
+							completed="No";
+						}
+						row+="<td>"+completed+"</td>";
+						row+="<td>"+(data["data"][i]["comment"] || "None")+"</td>";
 						row+="</tr>";
 						$("#users-table").append(row);
 					}
-					// for(var i=0; i!=data["data"]["participate"].length; i++)
-					// {
-					// 	var user=data["data"]["participate"][i];
-					// 	var row="<tr>";
-					// 	row+="<td>"+user["username"]+"</td>";
-					// 	row+="<td>"+user["model"]+"</td>";
-					// 	row+="<td>"+user["os"]+"</td>";
-					// 	row+="<td>"+user["comment"]+"</td>";
-					// 	row+="<td>"+(user["completed"]==1 ? "Yes":"No")+"</td>";
-					// 	row+="</tr>";
-					// 	$("#users-table-participate").append(row);
-					// }
-					// for(var i=0; i!=data["data"]["decline"].length; i++)
-					// {
-					// 	var user=data["data"]["decline"][i];
-					// 	var row="<tr>";
-					// 	row+="<td>"+user["username"]+"</td>";
-					// 	row+="<td>"+user["comment"]+"</td>";
-					// 	row+="<td>"+(user["completed"]==1 ? "Yes":"No")+"</td>";
-					// 	row+="</tr>";
-					// 	$("#users-table-decline").append(row);
-					// }
-					// for(var i=0; i!=data["data"]["undecided"].length; i++)
-					// {
-					// 	var user=data["data"]["undecided"][i];
-					// 	var row="<tr>";
-					// 	row+="<td>"+user["username"]+"</td>";
-					// 	row+="<td>"+user["model"]+"</td>";
-					// 	row+="<td>"+user["os"]+"</td>";
-					// 	row+="<td>"+user["comment"]+"</td>";
-					// 	row+="<td>"+(user["completed"]==1?"Yes":"No")+"</td>";
-					// 	row+="</tr>";
-					// 	$("#users-table-undecided").append(row);
-					// }
 				
 				}
 				else
@@ -114,9 +100,12 @@
 	    										label: "Yes"
 										    }
 										];
-									//var maxHeight=Math.max(result[1], result[0]);
+									
 									var desc=GetDescription(allQuestions, qid);
-									$("#survey-results-container").append("<p>Result for question ID "+qid+": "+desc+"</p><canvas width='800' height='400'></canvas>");
+									$("#survey-results-container").append("<p>Result for question ID "+qid+": "+desc+"</p>" +
+										"<div>Yes: <div class='legend-color' style='background-color:#46BFBD'></div> No: <div class='legend-color' style='background-color:#F7464A'></div></div>"+	
+										"<canvas width='800' height='400'></canvas>");
+									
 									var canvas=$("#survey-results-container canvas").last().get(0);
 									var ctx = canvas.getContext("2d");
 									var chart = new Chart(ctx).Pie(chartData);
@@ -160,8 +149,15 @@
 											label: "5"
 										}
 									]
-									var maxHeight=Math.max(result["1"], result["2"], result["3"], result["4"], result["5"]);
-									$("#survey-results-container").append("<p>Result for question ID "+qid+": "+desc+"</p><canvas width='800' height='400'></canvas>");
+									$("#survey-results-container").append("<p>Result for question ID "+qid+": "+desc+"</p>" +
+										"<div>" +
+										" 1: <div class='legend-color' style='background-color:#CC66FF'></div>" +
+										" 2: <div class='legend-color' style='background-color:#F7464A'></div>" +
+										" 3: <div class='legend-color' style='background-color:#46BFBD'></div>" +
+										" 4: <div class='legend-color' style='background-color:#33AD5C'></div>" +
+										" 5: <div class='legend-color' style='background-color:#FFAD5C'></div>" +
+										"</div>"+	
+										"<canvas width='800' height='400'></canvas>");
 									var canvas=$("#survey-results-container canvas").last().get(0);
 									var ctx = canvas.getContext("2d");
 									var chart = new Chart(ctx).Pie(chartData);
@@ -176,7 +172,6 @@
 					$(".userlink").click(getUserData);
 					$("#view-all").click(surveyShow);
 					$("#logoutButton").click(logout);
-					//setTimeout(function(){ getHeight();},100);
 					
 				}
 				else
@@ -235,8 +230,7 @@
 		    }
 		  });
 		}
-
+			
 	});
-
 }(jQuery));
 
