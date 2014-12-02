@@ -34,6 +34,9 @@ ob_start();
 
 // $_POST["action"]="all_survey_results";
 
+$_POST["action"]="get_user";
+$_POST["id"]="3";
+
 // $_POST["action"]="get_users";
 
 // $_POST["action"]="logout";
@@ -477,7 +480,48 @@ else if(ReceiveCommand("all_survey_results")) // expects: SESSION {"user":{"role
 		}
 	}
 }
-else if(ReceiveCommand("get_users")) // expects SESSION{user:{role}} returns: {"particiate"=>array of users, "decline"=>array of user, "undecided"=>array of user}
+else if(ReceiveCommand("get_user")) // expects SESSION{user:{role}} POST{"id"} returns: {user}
+{
+	$ret["action"]="get_user";
+	if(!isset($_SESSION["user"]))
+	{
+		$ret["msg"]="You are not signed in";
+		array_push($ret["errors"], "UserNotSignedIn");
+	}
+	else if($_SESSION["user"]["role"]!="admin")
+	{
+		$ret["msg"]="You are not an admin";
+		array_push($ret["errors"], "UserNotAdmin");
+	}
+	else{
+		try
+		{
+			$db->beginTransaction();
+			
+			$query="SELECT * FROM `users` WHERE `id`=:id";
+			$stmt=$db->prepare($query);
+			$stmt->execute(["id"=>$_POST["id"]]);
+			$db->commit();
+			
+			$user=$stmt->fetch();
+			if(!$user)
+			{
+				array_push($ret["errors"], "UserNotFound");
+				$ret["msg"]="The user is not found";
+			}
+			$user["password"]="";
+			$user["salt"]="";
+			$ret["data"]=$user;
+		}
+		catch(PDOException $ex)
+		{
+			$db->rollBack();
+			array_push($ret["errors"], $ex->getMessage());
+			$ret["msg"]="User retrieving failed due to an internal issue";
+		}
+	}
+}
+else if(ReceiveCommand("get_users")) // expects SESSION{user:{role}} returns: {array of users}
 {
 	$ret["action"]="get_users";
 	if(!isset($_SESSION["user"]))
@@ -502,27 +546,6 @@ else if(ReceiveCommand("get_users")) // expects SESSION{user:{role}} returns: {"
 				
 			$allUsers=$stmt->fetchAll();
 			$ret["data"]=$allUsers;
-			// $db->beginTransaction();
-			// $users=["participate"=>[], "decline"=>[], "undecided"=>[]];
-			
-			// $query="SELECT * FROM `users` WHERE `participate`=1";
-			// $stmt=$db->prepare($query);
-			// $stmt->execute();
-			// $users["participate"]=$stmt->fetchAll();
-			
-			// $query="SELECT * FROM `users` WHERE `participate`=0";
-			// $stmt=$db->prepare($query);
-			// $stmt->execute();
-			// $users["decline"]=$stmt->fetchAll();
-			
-			// $query="SELECT * FROM `users` WHERE `participate`=-1";
-			// $stmt=$db->prepare($query);
-			// $stmt->execute();
-			// $users["undecided"]=$stmt->fetchAll();
-			
-			// $db->commit();
-				
-			// $ret["data"]=$users;
 		}
 		catch(PDOException $ex)
 		{
