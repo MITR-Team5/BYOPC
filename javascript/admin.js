@@ -148,7 +148,8 @@
 											highlight: "#FFAD5C",
 											label: "5"
 										}
-									]
+									];
+									var desc=GetDescription(allQuestions, qid);
 									$("#survey-results-container").append("<p>Result for question ID "+qid+": "+desc+"</p>" +
 										"<div>" +
 										" 1: <div class='legend-color' style='background-color:#CC66FF'></div>" +

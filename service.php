@@ -5,10 +5,10 @@ ob_start();
 //For testing
 /////////////////////////////////////
 //  $_POST["action"]="register";
-//  $_POST["username"]="Kat";
+//  $_POST["username"]="test6";
 //  $_POST["role"]="normal";
-//  $_POST["password"]="crazymonkey";
-//  $_POST["password_again"]="crazymonkey";
+//  $_POST["password"]="";
+//  $_POST["password_again"]="";
 
 // $_POST["action"]="login";
 // $_POST["username"]="mikeogod";
@@ -33,6 +33,9 @@ ob_start();
 //  $_POST["qid"]=1;
 
 // $_POST["action"]="all_survey_results";
+
+// $_POST["action"]="get_user";
+// $_POST["id"]="3";
 
 // $_POST["action"]="get_users";
 
@@ -281,7 +284,7 @@ else if(ReceiveCommand("submit_survey")) // expects SESSION {user: {id}} POST{qu
 					{
 						$value=$q["value"];
 						$query="INSERT INTO `survey_results`(`userid`, `surveyid`, `value`) VALUES (:userid, :surveyid, :value)";
-						$stmt=$db->prepare($query);
+						$stmt=$db->prepare ($query);
 						$stmt->execute([":userid"=>$_SESSION["user"]["id"], ":surveyid"=>$qid, ":value"=>$value]);
 					}
 					
@@ -418,7 +421,7 @@ else if(ReceiveCommand("all_survey_results")) // expects: SESSION {"user":{"role
 			$db->commit();
 			
 			$numberCounts=array_fill(1, 1000, array_fill(1, 5, 0));
-			$boolCounts=array_fill(1, 1000, array(0=>0, 1=>0));
+			$boolCounts=array_fill(1, 1000, [0=>0, 1=>0]);
 			$maxId=0;
 			foreach($rawResult as $record)
 			{
@@ -477,7 +480,61 @@ else if(ReceiveCommand("all_survey_results")) // expects: SESSION {"user":{"role
 		}
 	}
 }
-else if(ReceiveCommand("get_users")) // expects SESSION{user:{role}} returns: {"particiate"=>array of users, "decline"=>array of user, "undecided"=>array of user}
+else if(ReceiveCommand("get_user")) // expects SESSION{user:{role}} POST{"id"} returns: {user and their answers}
+{
+	$ret["action"]="get_user";
+	if(!isset($_SESSION["user"]))
+	{
+		$ret["msg"]="You are not signed in";
+		array_push($ret["errors"], "UserNotSignedIn");
+	}
+	else if($_SESSION["user"]["role"]!="admin")
+	{
+		$ret["msg"]="You are not an admin";
+		array_push($ret["errors"], "UserNotAdmin");
+	}
+	else{
+		try
+		{
+			$db->beginTransaction();
+			
+			$query="SELECT * FROM `users` WHERE `id`=:id";
+			$stmt=$db->prepare($query);
+			$stmt->execute(["id"=>$_POST["id"]]);
+			
+			
+			$user=$stmt->fetch();
+			if(!$user)
+			{
+				$db->rollBack();
+				array_push($ret["errors"], "UserNotFound");
+				$ret["msg"]="The user is not found";
+			}
+			unset($user["password"]);
+			unset($user["salt"]);
+			//Get all the questions the user has answered
+			$query="SELECT * FROM `survey_results` WHERE `userid`=:userid";
+			$stmt=$db->prepare($query);
+			$stmt->execute(["userid"=>$_POST["id"]]);
+			$userAnswers=$stmt->fetchAll();
+			for($i=0; $i!=count($userAnswers); $i++)
+			{
+				unset($userAnswers[$i]["id"]);
+				unset($userAnswers[$i]["userid"]);
+			}
+			$user["answers"]=$userAnswers;
+			$db->commit();
+			$ret["data"]=$user;
+		}
+		catch(PDOException $ex)
+		{
+			$db->rollBack();
+			array_push($ret["errors"], $ex->getMessage());
+			$ret["msg"]="User retrieving failed due to an internal issue";
+		}
+	}
+}
+else if(ReceiveCommand("get_users")) // expects SESSION{user:{role}} returns: {array of users}
 {
 	$ret["action"]="get_users";
 	if(!isset($_SESSION["user"]))
@@ -502,27 +559,6 @@ else if(ReceiveCommand("get_users")) // expects SESSION{user:{role}} returns: {"
 				
 			$allUsers=$stmt->fetchAll();
 			$ret["data"]=$allUsers;
-			// $db->beginTransaction();
-			// $users=["participate"=>[], "decline"=>[], "undecided"=>[]];
-			
-			// $query="SELECT * FROM `users` WHERE `participate`=1";
-			// $stmt=$db->prepare($query);
-			// $stmt->execute();
-			// $users["participate"]=$stmt->fetchAll();
-			
-			// $query="SELECT * FROM `users` WHERE `participate`=0";
-			// $stmt=$db->prepare($query);
-			// $stmt->execute();
-			// $users["decline"]=$stmt->fetchAll();
-			
-			// $query="SELECT * FROM `users` WHERE `participate`=-1";
-			// $stmt=$db->prepare($query);
-			// $stmt->execute();
-			// $users["undecided"]=$stmt->fetchAll();
-			
-			// $db->commit();
-				
-			// $ret["data"]=$users;
 		}
 		catch(PDOException $ex)
 		{
@@ -590,13 +626,6 @@ function validate_password($new_password, $new_password_again, $db, $uid, $mode,
 		//Compare the new_password and new_password_again
 		if($new_password!=$new_password_again)
 		{
-			return false;
-		}
-
-		//Check the length of the new_password_again
-		if(strlen($new_password)<8)
-		{
-			$error_msg="Password is too short (needs to be at least 8 characters long)";
 			return false;
 		}
 
