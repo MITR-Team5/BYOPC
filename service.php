@@ -480,7 +480,7 @@ else if(ReceiveCommand("all_survey_results")) // expects: SESSION {"user":{"role
 		}
 	}
 }
-else if(ReceiveCommand("get_user")) // expects SESSION{user:{role}} POST{"id"} returns: {user}
+else if(ReceiveCommand("get_user")) // expects SESSION{user:{role}} POST{"id"} returns: {user and their answers}
 {
 	$ret["action"]="get_user";
 	if(!isset($_SESSION["user"]))
@@ -501,16 +501,29 @@ else if(ReceiveCommand("get_user")) // expects SESSION{user:{role}} POST{"id"} r
 			$query="SELECT * FROM `users` WHERE `id`=:id";
 			$stmt=$db->prepare($query);
 			$stmt->execute(["id"=>$_POST["id"]]);
-			$db->commit();
+			
 			
 			$user=$stmt->fetch();
 			if(!$user)
 			{
+				$db->rollBack();
 				array_push($ret["errors"], "UserNotFound");
 				$ret["msg"]="The user is not found";
 			}
-			$user["password"]="";
-			$user["salt"]="";
+			unset($user["password"]);
+			unset($user["salt"]);
+			//Get all the questions the user has answered
+			$query="SELECT * FROM `survey_results` WHERE `userid`=:userid";
+			$stmt=$db->prepare($query);
+			$stmt->execute(["userid"=>$_POST["id"]]);
+			$userAnswers=$stmt->fetchAll();
+			for($i=0; $i!=count($userAnswers); $i++)
+			{
+				unset($userAnswers[$i]["id"]);
+				unset($userAnswers[$i]["userid"]);
+			}
+			$user["answers"]=$userAnswers;
+			$db->commit();
 			$ret["data"]=$user;
 		}
 		catch(PDOException $ex)
