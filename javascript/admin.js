@@ -258,7 +258,7 @@
 
 	function getHeight() {
 	    $(window).load($("#footer").css("margin-top",$("#footer").outerHeight()+$("#content").outerHeight()+50));
-	    $(window).load($("#bottombar").css("margin-top",$("#bottombar").outerHeight()+$("#content").outerHeight()));
+	    $(window).load($("#bottombar").css("margin-top",$("#bottombar").outerHeight()+$("#content").outerHeight()+20));
 	  }
 
 	function logout(){
