@@ -48,11 +48,6 @@ else
 			<th>Survey Completed</th>
 			<th>Comment</th>
 		</table>
-
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<h2 id="go-back"><a href="#"> Back to All Users </a></h2>
-
 </div>
 
 <div id="content">
@@ -61,7 +56,6 @@ else
 	<div id="users-container">
 		<h2>Users:</h2>
 		<table id="users-table">
-			<th>uID</th>
 			<th>User Name</th>
 			<th>Role</th>
 			<th>Model</th>
@@ -70,24 +64,8 @@ else
 			<th>Survey Completed</th>
 			<th>Comment</th>
 		</table>
-<!-- 		<p>Declined users:</p>
-		<table id="users-table-decline">
-			<th>User Name</th>
-			<th>Comment</th>
-			<th>Survey Completed</th>
-		</table>
-		<p>Undecided users:</p>
-		<table id="users-table-undecided">
-			<th>User Name</th>
-			<th>Model</th>
-			<th>OS</th>
-			<th>Comment</th>
-			<th>Survey Completed</th>
-		</table> -->
 	</div>
 	
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
 	<h2 id="view-all"><a href="#">View All Survey Results</a></h2>
 	
 	<div id="survey-results">
