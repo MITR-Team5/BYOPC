@@ -48,6 +48,11 @@ else
 			<th>Survey Completed</th>
 			<th>Comment</th>
 		</table>
+
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+		<h2 id="go-back"><a href="#"> Back to All Users </a></h2>
+
 </div>
 
 <div id="content">
@@ -56,6 +61,7 @@ else
 	<div id="users-container">
 		<h2>Users:</h2>
 		<table id="users-table">
+			<th>uID</th>
 			<th>User Name</th>
 			<th>Role</th>
 			<th>Model</th>

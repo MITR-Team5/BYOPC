@@ -15,11 +15,12 @@
 					{
 						var row="<tr>";
 						if(data["data"][i]["role"] != "admin"){
-							row+="<td class='userlink'><a href=#>" + data["data"][i]["username"]+"</a></td>";
+							row+="<td class='userlink'><a href=#>" + data["data"][i]["id"]+"</a></td>";
 						}
 						else{
-							row+="<td>"+data["data"][i]["username"]+"</td>";
+							row+="<td>"+data["data"][i]["id"]+"</td>";
 						}
+						row+="<td>"+data["data"][i]["username"]+"</td>";
 						row+="<td>"+data["data"][i]["role"]+"</td>";
 						row+="<td>"+data["data"][i]["model"]+"</td>";
 						row+="<td>"+data["data"][i]["os"]+"</td>";
@@ -189,8 +190,37 @@
 
 		function getUserData() {
 			$("#content").hide();
-			var txt = $(this).text();
-			alert(txt);
+			var id = $(this).text();
+			alert(id);
+
+			$.ajax({
+						url:"service.php",
+						type:"POST",
+						data:{"action":"get_user", "id":id},
+						dataType:"json",
+						success:function(data, textStatus, jqXHR){
+							if(data["errors"].length==0)
+							{
+								for(var i=0; i!=data["data"].length; i++)
+								{
+									var row="<tr>";
+									row+="<td>"+data["data"][i]+"</td>";
+									//row+="<td>"+data["data"][i]["surveyid"]+"</td>";
+									//row+="<td>"+data["data"][i]["value"]+"</td>";
+									row+="</tr>";
+									$("#users-table").append(row);
+								}
+							
+							}
+							else
+							{
+								alert(data["msg"]);
+							}
+						},
+						error:function(jqXHR, textStatus, errorThrown){
+							alert("error!");
+						}
+					});			
 
 		}
 
