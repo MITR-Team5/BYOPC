@@ -15,11 +15,12 @@
 					{
 						var row="<tr>";
 						if(data["data"][i]["role"] != "admin"){
-							row+="<td class='userlink'><a href=#>" + data["data"][i]["username"]+"</a></td>";
+							row+="<td class='userlink'><a href=#>" + data["data"][i]["id"]+"</a></td>";
 						}
 						else{
-							row+="<td>"+data["data"][i]["username"]+"</td>";
+							row+="<td>"+data["data"][i]["id"]+"</td>";
 						}
+						row+="<td>"+data["data"][i]["username"]+"</td>";
 						row+="<td>"+data["data"][i]["role"]+"</td>";
 						row+="<td>"+data["data"][i]["model"]+"</td>";
 						row+="<td>"+data["data"][i]["os"]+"</td>";
@@ -200,9 +201,41 @@
 
 	function getUserData() {
 		$("#content").hide();
+
 		var txt = $(this).text();
 		alert(txt);
+			$.ajax({
+			url:"service.php",
+			type:"POST",
+			data:{"action":"get_users", "id":txt},
+			dataType:"json",
+			success:function(data, textStatus, jqXHR){
+				if(data["errors"].length==0)
+				{
+					for(var i=0; i!=data["data"].length; i++)
+					{
+						var row="<tr>";
+						row+="<td>"+data["data"][i]["role"]+"</td>";
+						row+="<td>"+data["data"][i]["model"]+"</td>";
+						row+="<td>"+data["data"][i]["os"]+"</td>";
+						row+="</tr>";
+						$("#users-table").append(row);
+					}
+					//Adjust the position of the footer
+					getHeight();
+				
+				}
+				else
+				{
+					alert(data["msg"]);
+				}
+			},
+			error:function(jqXHR, textStatus, errorThrown){
+				alert("error!");
+			}
+		});
 
+		$("#user-content").show();
 	}
 
 	function GetDescription(questions, id)
@@ -223,13 +256,9 @@
 		
 	}
 
-//	function getHeight() {
-//		$("#footer").css("margin-top",$("#footer").outerHeight()+$("#content").outerHeight()+40);
-//		$("#bottombar").css("margin-top",$("#bottombar").outerHeight()+$("#content").outerHeight());
-//	}
 	function getHeight() {
-	    $(window).load($("#footer").css("margin-top",$("#footer").outerHeight()+$("#content").outerHeight()+100));
-	    $(window).load($("#bottombar").css("margin-top",$("#bottombar").outerHeight()+$("#content").outerHeight()+50));
+	    $(window).load($("#footer").css("margin-top",$("#footer").outerHeight()+$("#content").outerHeight()+50));
+	    $(window).load($("#bottombar").css("margin-top",$("#bottombar").outerHeight()+$("#content").outerHeight()));
 	  }
 
 	function logout(){

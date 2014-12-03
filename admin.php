@@ -56,6 +56,7 @@ else
 	<div id="users-container">
 		<h2>Users:</h2>
 		<table id="users-table">
+			<th>uID</th>
 			<th>User Name</th>
 			<th>Role</th>
 			<th>Model</th>

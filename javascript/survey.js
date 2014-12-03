@@ -27,6 +27,7 @@
             }
             else if(q["type"]=="Numeric")
             {
+              newQuestion.append("<p>1 = very unsatisfied, 5 = very satisfied</p>");
               newQuestion.append("1<input type='radio' value='1' required>2<input type='radio' value='2' required>3" +
                   "<input type='radio' value='3' required>4<input type='radio' value='4' required>5<input type='radio' value='5' required>");
               newQuestion.find("input[type='radio']").attr("name", q["id"]);

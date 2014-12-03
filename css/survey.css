@@ -9,6 +9,7 @@ body{
   margin-left: auto;
   margin-right: auto;
   width: 75%;
+  text-shadow: black 0.05em 0.05em 0.1em;
 }
 
 #content h1{
