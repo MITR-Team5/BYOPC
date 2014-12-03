@@ -64,24 +64,8 @@ else
 			<th>Survey Completed</th>
 			<th>Comment</th>
 		</table>
-<!-- 		<p>Declined users:</p>
-		<table id="users-table-decline">
-			<th>User Name</th>
-			<th>Comment</th>
-			<th>Survey Completed</th>
-		</table>
-		<p>Undecided users:</p>
-		<table id="users-table-undecided">
-			<th>User Name</th>
-			<th>Model</th>
-			<th>OS</th>
-			<th>Comment</th>
-			<th>Survey Completed</th>
-		</table> -->
 	</div>
 	
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
 	<h2 id="view-all"><a href="#">View All Survey Results</a></h2>
 	
 	<div id="survey-results">

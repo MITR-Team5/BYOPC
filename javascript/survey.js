@@ -204,7 +204,7 @@
         alert("Failure: "+data["msg"]);
       }
     });
-    setTimeout(function(){ getHeight(); }, 500);
+    
     //getHeight();
   }
 

@@ -1,8 +1,8 @@
 (function($){
 	$(document).ready(function(){
 		
-		$("#logoutButton").click(logout);
 		
+		//Get all the users
 		$.ajax({
 			url:"service.php",
 			type:"POST",
@@ -51,6 +51,8 @@
 						row+="</tr>";
 						$("#users-table").append(row);
 					}
+					//Adjust the position of the footer
+					getHeight();
 				
 				}
 				else
@@ -164,15 +166,18 @@
 									var chart = new Chart(ctx).Pie(chartData);
 
 								}
+								
 							}
+							else
+							{
+								alert(data["msg"]);
+							}
+						},
+						error:function(jqXHR, textStatus, errorThrown){
+							alert("error!");
 						}
 					});
 					
-					$("#user-content").hide();
-					$("#survey-results").hide();
-					$(".userlink").click(getUserData);
-					$("#view-all").click(surveyShow);
-					$("#logoutButton").click(logout);
 					
 				}
 				else
@@ -183,52 +188,62 @@
 			error:function(jqXHR, textStatus, errorThrown){
 				alert("error!");
 			}
-
-
 		});
+		
+		$("#user-content").hide();
+		$("#survey-results").hide();
+		$(".userlink").click(getUserData);
+		$("#view-all").click(surveyShow);
+		$("#logoutButton").click(logout);
+		
+	});//Doc Ready
 
-		function getUserData() {
-			$("#content").hide();
-			var txt = $(this).text();
-			alert(txt);
+	function getUserData() {
+		$("#content").hide();
+		var txt = $(this).text();
+		alert(txt);
 
-		}
+	}
 
-		function GetDescription(questions, id)
+	function GetDescription(questions, id)
+	{
+		for(var i=0; i!=questions.length; i++)
 		{
-			for(var i=0; i!=questions.length; i++)
+			if(questions[i]["id"]==id)
 			{
-				if(questions[i]["id"]==id)
-				{
-					return questions[i]["desc"];
-				}
+				return questions[i]["desc"];
 			}
-			return "Unknown question";
 		}
+		return "Unknown question";
+	}
 
-		function surveyShow() {
-			$("#view-all").hide();
-			$("#survey-results").show();
-			getHeight();
-		}
+	function surveyShow() {
+		$("#view-all").hide();
+		$("#survey-results").show(400, getHeight);
+		
+	}
 
-		function getHeight() {
-			$("#footer").css("margin-top",$("#footer").outerHeight()+$("#content").outerHeight()+40);
-			$("#bottombar").css("margin-top",$("#bottombar").outerHeight()+$("#content").outerHeight());
-		}
+//	function getHeight() {
+//		$("#footer").css("margin-top",$("#footer").outerHeight()+$("#content").outerHeight()+40);
+//		$("#bottombar").css("margin-top",$("#bottombar").outerHeight()+$("#content").outerHeight());
+//	}
+	function getHeight() {
+	    $(window).load($("#footer").css("margin-top",$("#footer").outerHeight()+$("#content").outerHeight()+100));
+	    $(window).load($("#bottombar").css("margin-top",$("#bottombar").outerHeight()+$("#content").outerHeight()+50));
+	  }
 
-		function logout(){
-		  $.ajax({
-		    url:"service.php",
-		    type:"POST",
-		    data:{"action":"logout"},
-		    dataType:"json",
-		    success:function(data, textStatus, jqXHR){
-		      window.location.assign("index.php");
-		    }
-		  });
-		}
+	function logout(){
+	  $.ajax({
+	    url:"service.php",
+	    type:"POST",
+	    data:{"action":"logout"},
+	    dataType:"json",
+	    success:function(data, textStatus, jqXHR){
+	      window.location.assign("index.php");
+	    }
+	  });
+	}
 			
-	});
+	
 }(jQuery));
 
