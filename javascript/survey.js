@@ -123,30 +123,6 @@
 			}
 		}, "json");
 	}
-	
-
-  function nextpage() {
-    if($("#intro").css("display")!="none")
-    {
-      $("#intro").hide();
-      $("#page1").show();
-      return;
-    }
-    var done=false;
-    $("div").each(function(i, e){
-      if(e.id.substr(0, 4)==="page" && !isNaN(e.id.substr(4)) && e.style.display!='none' && !done)
-      {
-        $(e).hide();
-        $("#page"+((parseInt(e.id.substr(4))+1).toString())).show();
-        done=true;
-      }
-
-    });
-
-    setTimeout(function(){ getHeight(); }, 500);
-    //getHeight();
-
-  }
 
 
 
@@ -195,13 +171,12 @@
     }
     
   }
-	
-
+  
   function nextpage() {
     if($("#intro").css("display")!="none")
     {
       $("#intro").hide();
-      $("#page1").show("slow");
+      $("#page1").show("slow", getHeight);
       return;
     }
     var done=false;
@@ -209,13 +184,13 @@
       if(e.id.substr(0, 4)==="page" && !isNaN(e.id.substr(4)) && e.style.display!='none' && !done)
       {
         $(e).hide();
-        $("#page"+((parseInt(e.id.substr(4))+1).toString())).show("slow");
+        $("#page"+((parseInt(e.id.substr(4))+1).toString())).show("slow", getHeight);
         done=true;
       }
+
     });
 
   }
-  
 
 
   function complete(){
