@@ -16,7 +16,7 @@
     <div id="bottombar"></div>
 
     <div id="content">
-    	<h1> Welcome to BD's BYO-PC Information Hub </h1>
+    	<h1> Welcome to BD's BYOPC Information Hub </h1>
 
 	<div id="userlogin">
 

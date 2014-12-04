@@ -17,8 +17,7 @@ else
 <head>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="javascript/survey.js"></script>
-	<title>BYOPC @ BD
-	</title>
+	<title>BYOPC @ BD</title>
 	<link rel="stylesheet" type="text/css" href="css/survey.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
 
@@ -46,7 +45,9 @@ else
 	    	<h2> The BYOPC program at BD gives employees the option to purchase a laptop for use in the office and at home, or to use a laptop they already own as their work laptop.  </h2>
 	    	<p>&nbsp;</p>
 	    	<h2> Employees will be able to accomplish all of their work related computing on their personal computer. </h2>
-	    	<p>&nbsp;</p><p>&nbsp;</p>
+	    	<p>&nbsp;</p>
+	    	<img src="hp-elitebook-840-1.png" height="138px" width="231px"><img src="dell-e7440.png" >
+	    	<p>&nbsp;</p>
 	    	<p><input class = "nextPage" type="button" value="Continue"/> </p>
 	    </div>
 	    
@@ -65,14 +66,20 @@ else
 			<h2>In order to ensure maximum security of confidential BD information while allowing for flexibility for employees, a virtual machine "VM" will be used as the work desktop environment.  
 			All information will be saved to a central server located at BD, rather than on the personal computer. 
 			</h2>
-			<p>&nbsp;</p><p>&nbsp;</p>
+			<p>&nbsp;</p>
+ 			<img src="virtualization.png" > 
+ 			<p>&nbsp;</p>
 			<input class = "nextPage" type="button" value="Continue" /> 
 		</div>
 
 		<div id = "page4">
+ 			<img src="vmware-logo-1.png" width="300px" height="188px"> 
+ 			<p>&nbsp;</p>
 			<h2>A company ID and password will securely allow users to login and access their virtual machine using the VMWare client installed on the employee computer. </h2>
 			<h2>Employees will not be allowed to access programs or confidential information associated with BD on their personal laptop without using the VM. </h2>
- 			<p>&nbsp;</p><p>&nbsp;</p>
+ 			<p>&nbsp;</p>
+ 			<img src="virtualization2a.png" > 
+ 			<p>&nbsp;</p>
  			<input class = "nextPage" type="button" value="Continue" /> 
  		</div>
 
@@ -123,7 +130,7 @@ else
 						<option value="Windows7">Windows 7</option>
 						<option value="WindowsVista">Windows Vista</option>
 						<option value="WindowsXP">Windows XP</option>
-						<option value="MacOSX">Mac OSx</option>
+						<option value="MacOSX">Mac OSX</option>
 						<option value="Linux">Linux</option>
 						<option value="Other">Other</option>
 					</select>

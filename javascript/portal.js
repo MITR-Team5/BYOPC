@@ -11,8 +11,6 @@
 		$("#userlogin").show();
 		$("#footer").css("margin-top", "36%");
 	    $("#userloginButton").click(sendlogin);
-
-	    $("#userRegisterButton").click(sendreg);
 	}
 
 	function sendlogin() {

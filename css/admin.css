@@ -52,7 +52,7 @@ body{
   background-color:#ff4f01;
   height: 20px;
   width: 100%;
-  margin-top: 650px;
+  margin-top: 580px;
   left: 0px;
   right: 0px;
 }
@@ -86,7 +86,7 @@ body{
 #footer{
   position: relative;
   width: 100%;
-  margin-top: 700px;
+  margin-top: 630px;
   color: #ff4f01;
   text-align: center;
   white-space: nowrap;
@@ -118,6 +118,26 @@ body{
 }
 
 #users-table th{
+  border: 1px solid white;
+  text-align:center;
+  background-color: white;
+  color: #100b72;
+}
+
+#user-table{
+  width: 60%;
+  margin: auto;
+  border-collapse: collapse;
+  color: white;
+}
+
+#user-table td{
+  border: 1px solid white;
+  text-align:center;
+  color: white;
+}
+
+#user-table th{
   border: 1px solid white;
   text-align:center;
   background-color: white;

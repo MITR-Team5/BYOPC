@@ -15,7 +15,7 @@
 					{
 						var row="<tr>";
 						if(data["data"][i]["role"] != "admin"){
-							row+="<td class='userlink'><a href=#>" + data["data"][i]["id"]+"</a></td>";
+							row+="<td class='userlink'>" + data["data"][i]["id"]+"</td>";
 						}
 						else{
 							row+="<td>"+data["data"][i]["id"]+"</td>";
@@ -53,7 +53,8 @@
 						$("#users-table").append(row);
 					}
 					//Adjust the position of the footer
-					getHeight();
+					//getHeight();
+					$(".userlink").click(getUserData);
 				
 				}
 				else
@@ -222,7 +223,7 @@
 						$("#users-table").append(row);
 					}
 					//Adjust the position of the footer
-					getHeight();
+					//getHeight();
 				
 				}
 				else
